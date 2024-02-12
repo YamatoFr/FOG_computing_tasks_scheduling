@@ -1,0 +1,136 @@
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[top = 1.5cm, bottom = 1.5cm, left = 1.0cm, right = 1.0cm]{geometry}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[title]{appendix}
+\usepackage[most]{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{adjustbox}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{lastpage}
+\usepackage{longtable}
+\usepackage{minted}
+\usepackage{mathtools}
+\usepackage{ragged2e}
+\usepackage{subcaption}
+\usepackage{tocloft,url}
+\usepackage{threeparttable}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{xcolor}
+
+%----------------------------------------------------------------------------------
+%									  COMMANDES
+%----------------------------------------------------------------------------------
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\usemintedstyle{fruity}
+\definecolor{bg}{HTML}{282828}
+
+\setlength{\headheight}{15.35403pt}
+\setlength{\parskip}{0.5em}
+
+\setcounter{secnumdepth}{3}
+
+\newlistof{links}{lks}{Liste des liens}
+\newcommand\externallink[2]{%
+\refstepcounter{links}%
+\footnote{#1\url{#2}}%
+\addcontentsline{lks}{links}{%
+\protect\numberline{\thelinks}%
+\protect{\url{#2}}}%
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+	citecolor=darkgray,
+	pdftitle={Rapport de stage}
+}
+
+\newcommand\NB[1][0.3]{N\kern-#1em{B}}
+
+%%Création commande pour insérer image avec nom d figure directement
+%\newcommand{nomDeTaCommande}[nombreArguments]{CodeLaTeX}
+%\insertImage[position]{image_path}{scale}{Titre_figure}{label}
+\newcommand{\insertImage}[5][center]{
+	\begin{#1}
+		\includegraphics[scale=#3]{#2}
+		\captionof{figure}{#4}
+		\label{#5}
+	\end{#1}
+	}
+	
+	%%Création d'une nouvelle commande pour faire référence à une Figure
+	%Exemple : \appelFigure{schema} donne : Figure 1 (en italique)
+	\newcommand{\appelFigure}[1]{
+		\textit{Figure \ref{#1}}
+		}
+		
+		%%Création d'une nouvelle commande pour créer une barre horizontale
+		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+		
+		\renewcommand{\contentsname}{Sommaire}
+		
+		\DeclareMathOperator*{\argmin}{arg\,min}
+		\DeclareMathOperator*{\argmax}{arg\,max}
+		
+		%----------------------------------------------------------------------------------
+		%									INITIALISATIONS
+		%----------------------------------------------------------------------------------
+		\hbadness 11000
+		\vbadness 11000
+		\interlinepenalty 10000
+		
+		\title{{\huge \bfseries Title}\\[0.2cm]
+		{\Large sub title}}
+		\author{Théo \textsc{FIGINI}\\XX Informatique\\Année universitaire 20XX-XX}
+		\date{date}
+		\makeatletter
+		\setcounter{chapter}{0}
+		
+		\pagestyle{fancyplain}
+		\fancyhf{}
+		\lhead{header}
+		\rhead{\leftmark}
+		\cfoot{Page \thepage /\pageref{LastPage}}
+		\renewcommand{\headrulewidth}{0.5pt}
+		\renewcommand{\footrulewidth}{0.5pt}
+		\renewcommand{\plainheadrulewidth}{0.5pt}
+		\renewcommand{\plainfootrulewidth}{0.5pt}
+		\renewcommand\labelitemi{--}
+		\renewcommand\topfraction{.9}
+		\renewcommand\textfraction{0.35}
+		\renewcommand\floatpagefraction{0.8}
+		
+		% \bibliography{biblio}
+		
+		\counterwithout{figure}{chapter}
+		
+		
+\begin{document}
+\include{pageDeGarde}
+
+\renewcommand{\thefigure}{\arabic{figure}}
+\setcounter{figure}{0}
+
+\include{introduction}
+\include{realisation}
+\include{conclusion}
+
+% \printbibliography
+\end{document}
