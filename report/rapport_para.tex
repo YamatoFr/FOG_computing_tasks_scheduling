@@ -1,34 +1,21 @@
 \documentclass[12pt]{report}
 \usepackage[utf8]{inputenc}
-\usepackage[top = 1.5cm, bottom = 1.5cm, left = 1.0cm, right = 1.0cm]{geometry}
+\usepackage[vmargin = 1.5cm, hmargin = 1.0cm]{geometry}
 \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[T1]{fontenc}
-\usepackage[french]{babel}
+\usepackage[english]{babel}
 \usepackage[title]{appendix}
 \usepackage[most]{tcolorbox}
-\usepackage{amsmath}
+
+\usepackage{mathptmx, lmodern}
+\usepackage{amsmath, amssymb, amsfonts, mathtools}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage{adjustbox}
-\usepackage{caption}
-\usepackage{csquotes}
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{lmodern}
-\usepackage{listings}
-\usepackage{lastpage}
-\usepackage{longtable}
-\usepackage{minted}
-\usepackage{mathtools}
-\usepackage{ragged2e}
-\usepackage{subcaption}
-\usepackage{tocloft,url}
-\usepackage{threeparttable}
-\usepackage{url}
-\usepackage{verbatim}
-\usepackage{xcolor}
+\usepackage{adjustbox, caption, graphicx, subcaption, threeparttable}
+\usepackage{csquotes, fancyhdr, listings, minted, verbatim}
+\usepackage{hyperref, url}
+\usepackage{lastpage, longtable, tocloft, xcolor}
 
 %----------------------------------------------------------------------------------
 %									  COMMANDES
@@ -117,7 +104,7 @@
 		\renewcommand\textfraction{0.35}
 		\renewcommand\floatpagefraction{0.8}
 		
-		% \bibliography{biblio}
+		\bibliography{biblio}
 		
 		\counterwithout{figure}{chapter}
 		
@@ -128,6 +115,7 @@
 \renewcommand{\thefigure}{\arabic{figure}}
 \setcounter{figure}{0}
 
+\include{etatdelart}
 \include{introduction}
 \include{realisation}
 \include{conclusion}
