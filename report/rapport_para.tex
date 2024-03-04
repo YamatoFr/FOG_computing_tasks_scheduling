@@ -8,14 +8,17 @@
 \usepackage[title]{appendix}
 \usepackage[most]{tcolorbox}
 
-\usepackage{mathptmx, lmodern}
-\usepackage{amsmath, amssymb, amsfonts, mathtools}
-\usepackage{amssymb}
-\usepackage{amsfonts}
+\usepackage{fancyhdr, listings, minted, verbatim, indentfirst}
 \usepackage{adjustbox, caption, graphicx, subcaption, threeparttable}
-\usepackage{csquotes, fancyhdr, listings, minted, verbatim}
-\usepackage{hyperref, url}
+\usepackage{amsmath, amssymb, amsfonts, mathtools}
 \usepackage{lastpage, longtable, tocloft, xcolor}
+\usepackage{mathptmx, lmodern}
+\usepackage{hyperref, url}
+\usepackage{titlesec}
+
+% "csquotes should be loaded after fvextra to avoid a warning from the lineno package"
+% but in this case the culprit is the "minted" package
+\usepackage{csquotes}
 
 %----------------------------------------------------------------------------------
 %									  COMMANDES
@@ -71,7 +74,7 @@
 		%%Création d'une nouvelle commande pour créer une barre horizontale
 		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 		
-		\renewcommand{\contentsname}{Sommaire}
+		\renewcommand{\contentsname}{Table of Contents}
 		
 		\DeclareMathOperator*{\argmin}{arg\,min}
 		\DeclareMathOperator*{\argmax}{arg\,max}
@@ -83,10 +86,10 @@
 		\vbadness 11000
 		\interlinepenalty 10000
 		
-		\title{{\huge \bfseries Title}\\[0.2cm]
-		{\Large sub title}}
-		\author{Théo \textsc{FIGINI}\\XX Informatique\\Année universitaire 20XX-XX}
-		\date{date}
+		\title{{\huge \bfseries Fog computing task scheduling}\\[0.2cm]
+		{\Large a multi-objective AI-based approach}}
+		\author{Théo \textsc{FIGINI}\\M2 Computer Science\\Academic year 2023-2024}
+		\date{June, 18\textsuperscript{th} 2024}
 		\makeatletter
 		\setcounter{chapter}{0}
 		
@@ -110,6 +113,12 @@
 		
 		
 \begin{document}
+
+\titleformat{\chapter}{\normalfont\large\bfseries}{\thechapter}{20pt}{}
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
+
+\titlespacing*{\chapter}{0pt}{-10pt}{25pt}
+
 \include{pageDeGarde}
 
 \renewcommand{\thefigure}{\arabic{figure}}
