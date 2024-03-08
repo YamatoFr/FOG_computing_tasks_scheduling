@@ -12,9 +12,10 @@ $mode = Read-Host "Enter the mode of operation (1, 2 or 3)"
 
 foreach ($texFile in $texFiles) {
 	if ($texFile.Name -ne "rapport_para.tex") {
-		$fileName = $texFile.Name.Replace(".tex", "")
-		python .\scripts\citationcheck.py $fileName $mode
 		# print the name of the file to the console
 		Write-Host $fileName
+		
+		$fileName = $texFile.Name.Replace(".tex", "")
+		python .\scripts\citationcheck.py $fileName $mode
 	}
 }

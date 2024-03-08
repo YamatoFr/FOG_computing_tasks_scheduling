@@ -1,34 +1,41 @@
 import re
 import sys
+import bibtexparser
+from bibtexparser.bparser import BibTexParser
+from bibtexparser.customization import convert_to_unicode
 
 BIB = 'report/biblio.bib'
 
-def checker(file_content, biblio):
+def parse_bibtex_file(bibtex_filepath):
+    with open(bibtex_filepath) as bibtex_file:
+        parser = BibTexParser()
+        parser.customization = convert_to_unicode
+        bib_database = bibtexparser.load(bibtex_file, parser=parser)
+    return bib_database
+
+def checker(file_content, bib_database):
 	"""
-	This function checks the citations in the .bib file was cited in the .tex file and if the citation was checked
-	back in the .bib file.
-	Checked files have a '% X' at the end of the entry
+	This function checks the citations in the .bib file was cited in the .tex file
+ 	and if the citation was checked back in the .bib file.
+	Checked files have a '% X' at the end of the entry so the end of the entry looks like this:
+		@article{key,
+			...
+			...
+		} % X
 	
 	Args:
-		file_content (_type_): content of the .tex file
-		biblio (_type_): content of the .bib file
+		file_content (): content of the .tex file
+		bib_database (_type_): content of the .bib file
+
+	Returns:
+		match_table (dict): dictionary with the citation keys as keys and a list with two booleans as values
 	"""
 
-	match_table = {}
+	cited_keys = re.findall(r'\\cite(?:p)?\{([^}]+)\}', file_content)
+	checked_keys = [entry['ID'] for entry in bib_database.entries if 'note' in entry and entry['note'].strip().endswith('used')]
 
-	# Extract all keys from biblio.bib
-	bib_keys = re.findall(r'@[^{]+\{([^,]+),', biblio)
-	
-	citation_keys = re.findall(r'\\cite(?:p)?\{([^}]+)\}', file_content)
-	
-	# For each bib key, check if it was cited in the .tex file
-	for key in bib_keys:
-		match_table[key] = [key in citation_keys, False]
-			
-	# for each citation key, check if it was checked in biblio.bib
-	for key in citation_keys:
-		match_table[key][1] = key in bib_keys
-		
+	match_table = {entry['ID']: [entry['ID'] in cited_keys, entry['ID'] in checked_keys] for entry in bib_database.entries}
+
 	return match_table
 
 def print_table(table):
@@ -44,7 +51,7 @@ def print_table(table):
 	All columns are aligned to the center and have the same width, based on the longest string in the key column.
 
 	Args:
-		table (_type_): dictionary with the citation keys as keys and a list with two booleans as values
+		table (dict): dictionary with the citation keys as keys and a list with two booleans as values
 	"""
 	
 	# Find the kay with the longest length
@@ -72,10 +79,26 @@ def export_table(table, filename):
 			file.write(f"{key},{value[0]},{value[1]}\n")
 	
 	print('Table exported to' + filepath)
+
+def sort_table(table):
+	"""
+	Sort the table by putting cited keys first and uncited keys last.
+	Sort the cited keys by putting checked keys first and unchecked keys last.
+ 
+	returns: sorted_table (dict): the sorted table with the same structure as the input table
+	"""
+	
+	# Sort the table by putting cited keys first and uncited keys last
+	sorted_table = {k: v for k, v in sorted(table.items(), key=lambda item: item[1][0], reverse=True)}
+
+	# Sort the cited keys by putting checked keys first and unchecked keys last
+	sorted_table = {k: v for k, v in sorted(sorted_table.items(), key=lambda item: item[1][1], reverse=True)}
+
+	return sorted_table
 	
 # all the code below is executed when the script is called from the command line
 if __name__ == '__main__':
-    
+	
 	# Read the content of the .tex file passed as argument to the script
 	filename = sys.argv[1]
 	filepath = 'report/' + filename + '.tex'
@@ -87,8 +110,11 @@ if __name__ == '__main__':
 	with open(BIB, 'r') as file:
 		biblio = file.read()
 
+	# Parse the .bib file
+	biblio = parse_bibtex_file(BIB)
+
 	# Check the citations
-	table = checker(file_content, biblio)
+	table = sort_table(checker(file_content, biblio))
 
 	# if argument 2 is 1, print the table
 	# if argument 2 is 2, export the table to a .csv file
