@@ -278,6 +278,3 @@ TSWLatexianTemp*
 # ltex
 ltex.*
 .vscode
-
-# Fuzzylite
-fuzzylite
