@@ -42,7 +42,7 @@ def print_table(table):
 	"""
 	Print the table in a formatted way:
 	|--------------|-------|---------|
-	| Citation key | Cited | Checked |
+	| Citation_key | Cited | Checked |
 	|--------------|-------|---------|
 	|     key1     |  Y/N  |   Y/N   |
 	|     key2     |  Y/N  |   Y/N   |
@@ -59,7 +59,7 @@ def print_table(table):
 	
 	# Print the table
 	print(f"|{'-' * (max_key_length + 2)}|{'-' * 7}|{'-' * 9}|")
-	print(f"| {'Citation key':^{max_key_length}} | {'Cited':^5} | {'Checked':^7} |")
+	print(f"| {'Citation_key':^{max_key_length}} | {'Cited':^5} | {'Checked':^7} |")
 	print(f"|{'-' * (max_key_length + 2)}|{'-' * 7}|{'-' * 9}|")
 	for key, value in table.items():
 		print(f"| {key:^{max_key_length}} | {'Y' if value[0] else 'N':^5} | {'Y' if value[1] else 'N':^7} |")
@@ -73,12 +73,12 @@ def export_table(table, filename):
 	filepath = 'documents/' + filename + '_citcheck.csv'
 
 	with open(filepath, 'w') as file:
-		file.write('Citation key,Cited,Checked\n')
+		file.write('Citation_key,Cited,Checked\n')
 
 		for key, value in table.items():
 			file.write(f"{key},{value[0]},{value[1]}\n")
 	
-	print('Table exported to' + filepath)
+	print('Table exported to ' + filepath)
 
 def sort_table(table):
 	"""

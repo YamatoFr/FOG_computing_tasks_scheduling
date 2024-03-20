@@ -1,4 +1,4 @@
-Citation key             ,Cited ,Checked
+Citation_key             ,Cited ,Checked
 misirli-casalicchio-2024 ,True  ,True
 rjoub-bentahar-2017      ,True  ,True
 yousif-et-al-2024        ,True  ,True
@@ -19,6 +19,8 @@ abubacker-et-al-2023     ,True  ,True
 bonomi-et-al-2012        ,True  ,True
 keivani-tapamo-2019      ,False ,False
 jang-et-al-2012          ,False ,False
+Hari-et-al-2018          ,False ,False
 alwabi-et-al-2017        ,False ,False
 kraemer-et-al-2017       ,False ,False
 shanhe-et-al-2015        ,False ,False
+fuzzylite                ,False ,False
