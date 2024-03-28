@@ -53,9 +53,9 @@ OutputVariable: Processing
   term: remote_processing Trapezoid 36.000 60.000 72.000 100.000
 RuleBlock: 
   enabled: true
-  conjunction: AlgebraicProduct
+  conjunction: Minimum
   disjunction: Maximum
-  activation: AlgebraicProduct
+  activation: Minimum
   rule: if Bandwidth is bw_low and Residual_bat_charge is bat_low then Processing is local_processing
   rule: if Bandwidth is bw_low and Residual_bat_charge is bat_medium then Processing is local_processing
   rule: if Bandwidth is bw_low and Residual_bat_charge is bat_high then Processing is local_processing
@@ -101,3 +101,12 @@ RuleBlock:
   rule: if Bandwidth is bw_high and Memory is mem_low then Processing is remote_processing
   rule: if Bandwidth is bw_high and Memory is mem_medium then Processing is remote_processing
   rule: if Bandwidth is bw_high and Memory is mem_high then Processing is remote_processing
+  rule: if Bandwidth is bw_low and NB_concurrent_users is user_low then Processing is local_processing
+  rule: if Bandwidth is bw_low and NB_concurrent_users is user_medium then Processing is local_processing
+  rule: if Bandwidth is bw_low and NB_concurrent_users is user_high then Processing is local_processing
+  rule: if Bandwidth is bw_medium and NB_concurrent_users is user_low then Processing is remote_processing
+  rule: if Bandwidth is bw_medium and NB_concurrent_users is user_medium then Processing is remote_processing
+  rule: if Bandwidth is bw_medium and NB_concurrent_users is user_high then Processing is remote_processing
+  rule: if Bandwidth is bw_high and NB_concurrent_users is user_low then Processing is remote_processing
+  rule: if Bandwidth is bw_high and NB_concurrent_users is user_medium then Processing is remote_processing
+  rule: if Bandwidth is bw_high and NB_concurrent_users is user_high then Processing is remote_processing

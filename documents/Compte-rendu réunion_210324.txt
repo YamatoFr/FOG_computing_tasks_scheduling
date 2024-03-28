@@ -1,0 +1,19 @@
+Compte-rendu réunion 21/03/24
+
+Sujet : logique floue
+
+Problèmes :
+
+	- Le résultat du modèle sous Fuzzylite n'était influencé que par la variable "Bandwidth" à cause de la façon
+	dont les règles étaient définies.
+
+	- La façon dont les tâches sont ordonnancées n'était pas définie et certains paramètres tels que le temps 
+	d'éxécution d'une tâche et la charge qu'elle applicait sur l'appareil n'était pas pris en compte.
+
+	- La façon dont l'état du système est récupéré n'est pas clair.
+
+Décision prise :
+
+	Création d'un modèle de logique floue sous Python qui prenant en compte des paramètre tels que le nombre de 
+	coeurs utilisé par une tâche, le nombre de coeurs disponibles sur un noeud fog ou appareil mobile, le temps
+	d'éxécution de la tâches, etc. On pourra compléxifier le modèle en fonction de la progression. 

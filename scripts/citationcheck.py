@@ -68,15 +68,19 @@ def print_table(table):
 def export_table(table, filename):
 	"""
 	Export the table to a .csv file
+
+	Args:
+		table (dict): dictionary with the citation keys as keys and a list with two booleans as values
+		filename (str): name of the .tex file without the extension
 	"""
 
 	filepath = 'documents/' + filename + '_citcheck.csv'
 
 	with open(filepath, 'w') as file:
-		file.write('Citation_key,Cited,Checked\n')
+		file.write('Citation_key;Cited;Checked\n')
 
 		for key, value in table.items():
-			file.write(f"{key},{value[0]},{value[1]}\n")
+			file.write(f"{key};{value[0]};{value[1]}\n")
 	
 	print('Table exported to ' + filepath)
 

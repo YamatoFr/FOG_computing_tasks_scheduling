@@ -278,3 +278,6 @@ TSWLatexianTemp*
 # ltex
 ltex.*
 .vscode
+
+# Python
+__pycache__
