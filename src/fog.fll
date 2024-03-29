@@ -54,59 +54,11 @@ OutputVariable: Processing
 RuleBlock: 
   enabled: true
   conjunction: Minimum
-  disjunction: Maximum
+  disjunction: NormalizedSum
   activation: Minimum
-  rule: if Bandwidth is bw_low and Residual_bat_charge is bat_low then Processing is local_processing
-  rule: if Bandwidth is bw_low and Residual_bat_charge is bat_medium then Processing is local_processing
-  rule: if Bandwidth is bw_low and Residual_bat_charge is bat_high then Processing is local_processing
-  rule: if Bandwidth is bw_medium and Residual_bat_charge is bat_low then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Residual_bat_charge is bat_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Residual_bat_charge is bat_high then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Residual_bat_charge is bat_low then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Residual_bat_charge is bat_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Residual_bat_charge is bat_high then Processing is remote_processing
-  rule: if Bandwidth is bw_low and Datasize is data_low then Processing is local_processing
-  rule: if Bandwidth is bw_low and Datasize is data_medium then Processing is local_processing
-  rule: if Bandwidth is bw_low and Datasize is data_high then Processing is local_processing
-  rule: if Bandwidth is bw_medium and Datasize is data_low then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Datasize is data_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Datasize is data_high then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Datasize is data_low then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Datasize is data_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Datasize is data_high then Processing is remote_processing
-  rule: if Bandwidth is bw_low and Load is load_low then Processing is local_processing
-  rule: if Bandwidth is bw_low and Load is load_medium then Processing is local_processing
-  rule: if Bandwidth is bw_low and Load is load_high then Processing is local_processing
-  rule: if Bandwidth is bw_medium and Load is load_low then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Load is load_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Load is load_high then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Load is load_low then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Load is load_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Load is load_high then Processing is remote_processing
-  rule: if Bandwidth is bw_low and VM_available is vm_low then Processing is local_processing
-  rule: if Bandwidth is bw_low and VM_available is vm_medium then Processing is local_processing
-  rule: if Bandwidth is bw_low and VM_available is vm_high then Processing is local_processing
-  rule: if Bandwidth is bw_medium and VM_available is vm_low then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and VM_available is vm_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and VM_available is vm_high then Processing is remote_processing
-  rule: if Bandwidth is bw_high and VM_available is vm_low then Processing is remote_processing
-  rule: if Bandwidth is bw_high and VM_available is vm_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_high and VM_available is vm_high then Processing is remote_processing
-  rule: if Bandwidth is bw_low and Memory is mem_low then Processing is local_processing
-  rule: if Bandwidth is bw_low and Memory is mem_medium then Processing is local_processing
-  rule: if Bandwidth is bw_low and Memory is mem_high then Processing is local_processing
-  rule: if Bandwidth is bw_medium and Memory is mem_low then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Memory is mem_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and Memory is mem_high then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Memory is mem_low then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Memory is mem_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_high and Memory is mem_high then Processing is remote_processing
-  rule: if Bandwidth is bw_low and NB_concurrent_users is user_low then Processing is local_processing
-  rule: if Bandwidth is bw_low and NB_concurrent_users is user_medium then Processing is local_processing
-  rule: if Bandwidth is bw_low and NB_concurrent_users is user_high then Processing is local_processing
-  rule: if Bandwidth is bw_medium and NB_concurrent_users is user_low then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and NB_concurrent_users is user_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_medium and NB_concurrent_users is user_high then Processing is remote_processing
-  rule: if Bandwidth is bw_high and NB_concurrent_users is user_low then Processing is remote_processing
-  rule: if Bandwidth is bw_high and NB_concurrent_users is user_medium then Processing is remote_processing
-  rule: if Bandwidth is bw_high and NB_concurrent_users is user_high then Processing is remote_processing
+  rule: if Bandwidth is bw_low then Processing is local_processing
+  rule: if Bandwidth is not bw_low and (Datasize is data_high or Datasize is data_medium) then Processing is remote_processing
+  rule: if Bandwidth is not bw_low and Datasize is data_low and (Load is load_high or Memory is mem_low) then Processing is remote_processing
+  rule: if Bandwidth is not bw_low and Datasize is data_low and (NB_concurrent_users is user_low or Memory is mem_low) then Processing is remote_processing
+  rule: if Bandwidth is not bw_low and Datasize is data_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is load_low then Processing is local_processing
+  rule: if Bandwidth is not bw_low and Datasize is data_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is not load_low then Processing is remote_processing

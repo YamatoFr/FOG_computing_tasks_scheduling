@@ -1,6 +1,9 @@
+from math import nan
 from numpy import random as rd
 from fuzzyengine import engine
 from numpy.random import Generator, PCG64
+import pandas as pd
+import fuzzylite as fl
 
 # define the input variables for ease of use
 bandwidth = engine.input_variable("Bandwidth")
@@ -27,28 +30,29 @@ def random_input(min, max):
 # create an empty table to store the values, the headers are the variables
 table = {
 	"Bandwidth": [],
-	"Datasize": [],
 	"Residual_bat_charge": [],
-	"Load": [],
-	"Memory": [],
+	"Datasize": [],
 	"VM_available": [],
 	"NB_concurrent_users": [],
+	"Memory": [],
+	"Load": [],
 	"Processing": [],
+	"Fuzzy_output": []
 }
 
 # loop through the input variables and set the values
-for i in range(0, 20):
+for i in range(0, 500):
 	# print the iteration number
-	print("\nIteration: ", i)
+	print("\nIteration: ", i+1)
 
 	# set the input values
-	bandwidth.value = random_input(0, 100)
-	datasize.value = random_input(0, 600)
-	battery.value = random_input(0, 100)
-	load.value = random_input(0, 100)
-	memory.value = random_input(0, 100)
-	vm.value = random_input(0, 50)
-	nb_users.value = random_input(0, 100)
+	bandwidth.value = random_input(1, 100)
+	datasize.value = random_input(1, 600)
+	battery.value = random_input(1, 100)
+	load.value = random_input(1, 100)
+	memory.value = random_input(1, 100)
+	vm.value = random_input(1, 50)
+	nb_users.value = random_input(1, 100)
 
 	# store the values in the table
 	table["Bandwidth"].append(bandwidth.value)
@@ -58,19 +62,23 @@ for i in range(0, 20):
 	table["Memory"].append(memory.value)
 	table["VM_available"].append(vm.value)
 	table["NB_concurrent_users"].append(nb_users.value)
-
-	print("Bandwidth: ", bandwidth.fuzzy_value(), "\nDatasize: ", datasize.fuzzy_value(), "\nBattery: ", battery.fuzzy_value(), "\nLoad: ", load.fuzzy_value(), "\nMemory: ", memory.fuzzy_value(), "\nVM: ", vm.fuzzy_value(), "\nUsers: ", nb_users.fuzzy_value())
+	
+	# print("Bandwidth: ", bandwidth.fuzzy_value(), "\nDatasize: ", datasize.fuzzy_value(), "\nBattery: ", battery.fuzzy_value(), "\nLoad: ", load.fuzzy_value(), "\nMemory: ", memory.fuzzy_value(), "\nVM: ", vm.fuzzy_value(), "\nUsers: ", nb_users.fuzzy_value())
 
 	engine.process()
 
 	print("\nOutput value: ", round(float(engine.output_variable("Processing").value), 3))
-	table["Processing"].append(round(float(engine.output_variable("Processing").value), 3))
+
+	# if the output value != nan, store it in the table
+	if engine.output_variable("Processing").fuzzy_value() != nan:
+		table["Processing"].append(round(float(engine.output_variable("Processing").value), 3))
+	else:
+		table["Processing"].append("nan")
 	print("\nfuzzy output: ", engine.output_variable("Processing").fuzzy_value())
-	# print("\n")
+	table["Fuzzy_output"].append(engine.output_variable("Processing").fuzzy_value())
 
 # save the table to a csv file, use ; as separator
-import pandas as pd
 
 df = pd.DataFrame(table)
-df.to_csv("documents/fuzzy_results.csv", sep=';')
+df.to_csv("documents/fuzzy_results.csv", sep=';', index=False)
 

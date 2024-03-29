@@ -100,17 +100,15 @@ engine = fl.Engine(
 			rules = [
 				fl.Rule.create("if Bandwidth is bw_low then Processing is local_processing"),
 
-				fl.Rule.create("if Bandwidth is not bw_high and (Datasize is data_high or Datasize is data_medium) then Processing is remote_processing"),
+				fl.Rule.create("if Bandwidth is not bw_low and Datasize is not data_low then Processing is remote_processing"),
 
-				fl.Rule.create("if Bandwidth is bw_medium and Datasize is data_low and NB_concurrent_users is user_low then Processing is remote_processing"),
+				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and (Load is load_high or Memory is mem_low) then Processing is remote_processing"),
 
-				fl.Rule.create("if (Bandwidth is bw_medium or Bandwidth is bw_high) and Datasize is data_low and (Load is load_high or Memory is mem_low) then Processing is remote_processing"),
+				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and (NB_concurrent_users is user_low or Memory is mem_low) then Processing is remote_processing"),
 
-				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and (VM_available is vm_medium or VM_available is vm_high) and (NB_concurrent_users is user_low or Memory is mem_low) then Processing is remote_processing"),
+				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is load_low then Processing is local_processing"),
 
-				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and VM_available is vm_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is load_low then Processing is local_processing"),
-
-				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and VM_available is not vm_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is not load_low then Processing is remote_processing"),
+				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is not load_low then Processing is remote_processing"),
 			]
         )
     ]
