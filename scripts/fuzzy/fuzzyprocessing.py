@@ -41,7 +41,7 @@ table = {
 }
 
 # loop through the input variables and set the values
-for i in range(0, 500):
+for i in range(0, 1000):
 	# print the iteration number
 	print("\nIteration: ", i+1)
 
@@ -78,7 +78,6 @@ for i in range(0, 500):
 	table["Fuzzy_output"].append(engine.output_variable("Processing").fuzzy_value())
 
 # save the table to a csv file, use ; as separator
-
 df = pd.DataFrame(table)
 df.to_csv("documents/fuzzy_results.csv", sep=';', index=False)
 

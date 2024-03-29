@@ -110,6 +110,6 @@ engine = fl.Engine(
 
 				fl.Rule.create("if Bandwidth is not bw_low and Datasize is data_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is not load_low then Processing is remote_processing"),
 			]
-        )
+		)
     ]
 )
