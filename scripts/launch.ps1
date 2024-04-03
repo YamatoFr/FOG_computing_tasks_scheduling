@@ -1,4 +1,4 @@
-$reportFolder = Read-Host "Enter the path to the report folder"
+$reportFolder = "C:\Users\theof\OneDrive\Documents\Github\FOG_computing_tasks_scheduling\report"
 # Replace with the actual path to your report folder
 
 # Get all the .tex files in the report folder

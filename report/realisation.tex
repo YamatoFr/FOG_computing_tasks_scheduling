@@ -1,4 +1,59 @@
-\chapter*{Travail réalisé}
-\label{chap:realisation}
+\chapter*{Offloading using Fuzzy logic}
+\label{chap:fuzzy}
 
-Réalisation
+\section*{Introduction}
+
+Introduced in 1965 by Lotfi Zadeh\cite{zadeh-1965}, fuzzy logic is based on a "degree of truth" instead of a finite value, usually 0 or 1, it aims to
+represent the vagueness of human language and thought. Fuzzy systems are the means to implement fuzzy logic, they are two types of fuzzy systems:
+Mamdani and Sugeno, both are similar but differ in the way the output is determined. The most common one Mamdani and it's the one we will be using in
+this project. The Mamdani fuzzy system follows three steps:
+\begin{itemize}
+	\item the inputs are fuzzified into fuzzy membership functions,
+	\item a set of rules are applied to the fuzzy inputs to determine the fuzzy output,
+	\item the fuzzy output is defuzzified to get a crisp value.
+\end{itemize}
+
+\subsection*{Fuzzification}
+
+Fuzzification is the process of converting a crisp value into a fuzzy value, this is done by assigning a membership function to the input value.
+The membership function is a curve that defines how much the input value belongs to a certain fuzzy set. The most common membership functions are
+the triangular and trapezoidal functions, they are defined by three or four parameters respectively. The triangular function is defined by the
+parameters $a$, $b$ and $c$ and is given by:
+\begin{equation}
+	\mu(x) = \begin{cases}
+		0                   & \text{if } x \leq a,        \\
+		\frac{x - a}{b - a} & \text{if } a \leq x \leq b, \\
+		\frac{c - x}{c - b} & \text{if } b \leq x \leq c, \\
+		0                   & \text{if } x \geq c.
+	\end{cases}
+\end{equation}
+
+The trapezoidal function is defined by the parameters $a$, $b$, $c$ and $d$ and is given by:
+\begin{equation}
+	\mu(x) = \begin{cases}
+		0                   & \text{if } x \leq a,        \\
+		\frac{x - a}{b - a} & \text{if } a \leq x \leq b, \\
+		1                   & \text{if } b \leq x \leq c, \\
+		\frac{d - x}{d - c} & \text{if } c \leq x \leq d, \\
+		0                   & \text{if } x \geq d.
+	\end{cases}
+\end{equation}
+
+\subsection*{Rule evaluation}
+
+The rule evaluation is the process of determining the fuzzy output based on the fuzzy inputs and a set of rules. The rules are defined by two parts:
+the "if" or antecedent part and the "then" or consequent part. The antecedent part deals with inputs, it can either be a single input or a combination
+of inputs, the combination can be done using the logical operators "and" and "or". The consequent part deals with the output. In the context of this
+project, the rules are usually of the form "if Bandwidth is low then processing is local". The rules are generally defined by the user and are based
+on their knowledge of the system.
+
+\subsection*{Defuzzification}
+
+Defuzzification is the process of converting a fuzzy output into a crisp value, there are several methods to do this, the most common one is the
+centroid method. The centroid method calculates the center of mass of the fuzzy output, this is done by taking the weighted average of the output
+values. The weighted average is calculated by taking the sum of the product of the output value and its membership value divided by the sum of the
+membership values. The formula for the centroid method is given by:
+\begin{equation}
+	y = \frac{\sum_{i} \mu_i \cdot y_i}{\sum_{i} \mu_i}.
+\end{equation}
+Where $y$ is the crisp output, $\mu_i$ is the membership value of the output value $y_i$.
