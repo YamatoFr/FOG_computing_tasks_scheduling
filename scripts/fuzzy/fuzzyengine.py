@@ -62,8 +62,8 @@ engine = fl.Engine(
 			maximum=50.0,
 			terms=[
 				fl.Trapezoid("vm_low", 0.0, 0.0, 15.0, 20.0),
-				fl.Trapezoid("vm_medium", 15.0, 22.5, 27.5, 35.0),
-				fl.Trapezoid("vm_high", 30.0, 35.5, 50.0, 50.0)
+				fl.Trapezoid("vm_medium", 15.0, 22.0, 27.0, 35.0),
+				fl.Trapezoid("vm_high", 30.0, 35.0, 50.0, 50.0)
 			]
 		),
 		fl.InputVariable(

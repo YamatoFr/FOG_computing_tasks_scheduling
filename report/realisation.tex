@@ -54,6 +54,69 @@ centroid method. The centroid method calculates the center of mass of the fuzzy 
 values. The weighted average is calculated by taking the sum of the product of the output value and its membership value divided by the sum of the
 membership values. The formula for the centroid method is given by:
 \begin{equation}
-	y = \frac{\sum_{i} \mu_i \cdot y_i}{\sum_{i} \mu_i}.
+	y = \frac{\sum_{i} \mu_i \cdot y_i}{\sum_{i} \mu_i}
 \end{equation}
-Where $y$ is the crisp output, $\mu_i$ is the membership value of the output value $y_i$.
+Where $y$ is the crisp output, $\mu_i$ is the membership value of the output value $y_i$. The centroid method is the most common method because it
+is simple and easy to implement. However, it is not always the best method, other methods like the mean of maximum and the largest of maximum can
+be used depending on the application.
+
+\section*{Fuzzy system for offloading}
+
+To demonstrate the use of fuzzy logic in offloading, we wrote two simple programs in Python. The goal was to recreate the experiment done by Hari et
+al.\cite{Hari-et-al-2018}. The first program uses the pyfuzzylite\cite{fuzzylite} library to implement a fuzzy engine with all the variables and
+rules needed to determine the offloading decision. The second program uses the NumPy library to generate random values for the inputs and then uses
+the fuzzy engine to determine the offloading decision. The fuzzy engine is defined by the variables shown in table \ref{tab:fuzzy-input} and
+\ref{tab:fuzzy-output}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		Name                & Range    & Fuzzy set & Membership function & Parameters         \\
+		\hline
+		Bandwidth           & [0, 100] & bw_low    & trapezoidal         & 0, 20, 30, 40      \\
+		(in Mbps)           &          & bw_med    & trapezoidal         & 35, 45, 60, 70     \\
+		                    &          & bw_high   & trapezoidal         & 65, 75, 90, 100    \\
+		\hline
+		Data size           & [0, 600] & data_low  & trapezoidal         & 0, 0, 230, 360     \\
+		(in KB)             &          & data_med  & trapezoidal         & 250, 350, 470, 590 \\
+		                    &          & data_high & trapezoidal         & 450, 540, 600, 600 \\
+		\hline
+		Residual battery    & [0, 100] & bat_low   & trapezoidal         & 0, 0, 25, 35       \\
+		charge (in \%)      &          & bat_med   & trapezoidal         & 25, 40, 60, 75     \\
+		                    &          & bat_high  & trapezoidal         & 60, 75, 100, 100   \\
+		\hline
+		Load                & [0, 100] & load_low  & trapezoidal         & 0, 0, 25, 40       \\
+		(in \%)             &          & load_med  & trapezoidal         & 35, 45, 60, 70     \\
+		                    &          & load_high & trapezoidal         & 65, 80, 100, 100   \\
+		\hline
+		Memory              & [0, 100] & mem_low   & trapezoidal         & 0, 0, 25, 40       \\
+		(in \%)             &          & mem_med   & trapezoidal         & 35, 45, 60, 70     \\
+		                    &          & mem_high  & trapezoidal         & 65, 80, 100, 100   \\
+		\hline
+		Virtual machines    & [0, 50]  & vm_low    & trapezoidal         & 0, 0, 15, 20       \\
+		available           &          & vm_med    & trapezoidal         & 15, 22, 37, 40     \\
+		                    &          & vm_high   & trapezoidal         & 30, 35, 50, 50     \\
+		\hline
+		Number              & [0, 100] & user_low  & trapezoidal         & 0, 0, 25, 40       \\
+		of concurrent users &          & user_med  & trapezoidal         & 30, 40, 60, 70     \\
+		                    &          & user_high & trapezoidal         & 60, 75, 100, 100   \\
+		\hline
+	\end{tabular}
+	\caption{Input variables for the fuzzy engine.}
+	\label{tab:fuzzy-input}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		Name                & Range    & Fuzzy set & Membership function & Parameters      \\
+		\hline
+		Offloading decision & [0, 100] & local     & trapezoidal         & 0, 12, 24, 48   \\
+		                    &          & remote    & trapezoidal         & 36, 60, 72, 100 \\
+		\hline
+	\end{tabular}
+	\caption{Output variable for the fuzzy engine.}
+	\label{tab:fuzzy-output}
+\end{table}
