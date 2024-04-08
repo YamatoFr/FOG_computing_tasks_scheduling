@@ -1,7 +1,7 @@
-\chapter*{Offloading using Fuzzy logic}
+\chapter{Offloading using Fuzzy logic}
 \label{chap:fuzzy}
 
-\section*{Introduction}
+\section{Introduction}
 
 Introduced in 1965 by Lotfi Zadeh\cite{zadeh-1965}, fuzzy logic is based on a "degree of truth" instead of a finite value, usually 0 or 1, it aims to
 represent the vagueness of human language and thought. Fuzzy systems are the means to implement fuzzy logic, they are two types of fuzzy systems:
@@ -13,7 +13,7 @@ this project. The Mamdani fuzzy system follows three steps:
 	\item the fuzzy output is defuzzified to get a crisp value.
 \end{itemize}
 
-\subsection*{Fuzzification}
+\subsection{Fuzzification}
 
 Fuzzification is the process of converting a crisp value into a fuzzy value, this is done by assigning a membership function to the input value.
 The membership function is a curve that defines how much the input value belongs to a certain fuzzy set. The most common membership functions are
@@ -39,7 +39,7 @@ The trapezoidal function is defined by the parameters $a$, $b$, $c$ and $d$ and 
 	\end{cases}
 \end{equation}
 
-\subsection*{Rule evaluation}
+\subsection{Rule evaluation}
 
 The rule evaluation is the process of determining the fuzzy output based on the fuzzy inputs and a set of rules. The rules are defined by two parts:
 the "if" or antecedent part and the "then" or consequent part. The antecedent part deals with inputs, it can either be a single input or a combination
@@ -47,7 +47,7 @@ of inputs, the combination can be done using the logical operators "and" and "or
 project, the rules are usually of the form "if Bandwidth is low then processing is local". The rules are generally defined by the user and are based
 on their knowledge of the system.
 
-\subsection*{Defuzzification}
+\subsection{Defuzzification}
 
 Defuzzification is the process of converting a fuzzy output into a crisp value, there are several methods to do this, the most common one is the
 centroid method. The centroid method calculates the center of mass of the fuzzy output, this is done by taking the weighted average of the output
@@ -60,7 +60,9 @@ Where $y$ is the crisp output, $\mu_i$ is the membership value of the output val
 is simple and easy to implement. However, it is not always the best method, other methods like the mean of maximum and the largest of maximum can
 be used depending on the application.
 
-\section*{Fuzzy system for offloading}
+\section{Fuzzy system for offloading}
+
+\subsection{Setting up the engine}
 
 To demonstrate the use of fuzzy logic in offloading, we wrote two simple programs in Python. The goal was to recreate the experiment done by Hari et
 al.\cite{Hari-et-al-2018}. The first program uses the pyfuzzylite\cite{fuzzylite} library to implement a fuzzy engine with all the variables and
@@ -119,4 +121,66 @@ the fuzzy engine to determine the offloading decision. The fuzzy engine is defin
 	\end{tabular}
 	\caption{Output variable for the fuzzy engine.}
 	\label{tab:fuzzy-output}
+\end{table}
+
+The original paper by Hari et al. did not provide all the rules used, so we had to come up with our own rules. We established them based our
+understanding of the system and the variables. Unlike the original paper, where the rules only combined the bandwidth with one other variable, we
+decided to combine the bandwidth with all the relevant variables. The rules are shown in table \ref{tab:fuzzy-rules}.
+
+\begin{table}
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|}
+			\hline
+			   & Rules                                                                                                                                          \\
+			\hline
+			R1 & IF Bandwidth is bw_low                                                                                                                         \\
+			   & THEN Processing local_processing                                                                                                               \\
+			\hline
+			R2 & IF Bandwidth is not bw_low and Datasize is not data_low                                                                                        \\
+			   & THEN Processing is remote_processing                                                                                                           \\
+			\hline
+			R3 & IF Bandwidth is not bw_low and Datasize is data_low and (Load is load_high or Memory is mem_low)                                               \\
+			   & THEN Processing is remote_processing                                                                                                           \\
+			\hline
+			R4 & IF Bandwidth is not bw_low and Datasize is data_low and (NB_concurrent_users is user_low or Memory is mem_low)                                 \\
+			   & THEN Processing is remote_processing                                                                                                           \\
+			\hline
+			R5 & IF Bandwidth is not bw_low and Datasize is data_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is load_low     \\
+			   & THEN Processing is local_processing                                                                                                            \\
+			\hline
+			R6 & IF Bandwidth is not bw_low and Datasize is data_low and NB_concurrent_users is not user_low and Memory is not mem_low and Load is not load_low \\
+			   & THEN Processing is remote_processing                                                                                                           \\
+			\hline
+		\end{tabular}}
+	\caption{Rules for the fuzzy engine.}
+	\label{tab:fuzzy-rules}
+\end{table}
+
+From these rules we can see that two variables have no impact on the offloading decision, the residual battery charge and the number of virtual
+machines available.
+
+\subsection{Results}
+
+After running the programs, we exported the results to a CSV file.
+
+\begin{table}
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+			\hline
+			Bandwidth & Residual       & Data size & VM available & Number of        & Memory & Load & Processing & Fuzzy output                                     \\
+			          & battery charge &           &              & concurrent users &        &      &            &                                                  \\
+			\hline
+			99        & 82             & 239       & 4            & 47               & 12     & 78   & 67.258     & 0.000/local_processing + 0.931/remote_processing \\
+			8         & 46             & 392       & 16           & 60               & 64     & 53   & 51.741     & 0.400/local_processing + 0.600/remote_processing \\
+			90        & 93             & 8         & 46           & 12               & 4      & 5    & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
+			58        & 59             & 529       & 42           & 85               & 72     & 74   & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
+			33        & 19             & 435       & 21           & 78               & 71     & 78   & 40.546     & 0.700/local_processing + 0.300/remote_processing \\
+			81        & 36             & 373       & 22           & 93               & 63     & 24   & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
+			20        & 85             & 376       & 10           & 83               & 2      & 90   & 21.6       & 1.000/local_processing + 0.000/remote_processing \\
+			\hline
+		\end{tabular}}
+	\caption{Sample results from the fuzzy engine.}
+	\label{tab:fuzzy-results}
 \end{table}

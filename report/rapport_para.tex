@@ -33,6 +33,8 @@
 \setlength{\parskip}{0.5em}
 
 \setcounter{secnumdepth}{3}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}
 
 \newlistof{links}{lks}{Liste des liens}
 \newcommand\externallink[2]{%
@@ -124,6 +126,8 @@
 
 \renewcommand{\thefigure}{\arabic{figure}}
 \setcounter{figure}{0}
+
+\tableofcontents
 
 \include{abstract}
 \include{introduction}

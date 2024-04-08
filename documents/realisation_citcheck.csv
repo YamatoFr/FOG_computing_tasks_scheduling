@@ -1,5 +1,7 @@
 Citation_key             ;Cited ;Checked
+Hari-et-al-2018          ;True  ;True
 zadeh-1965               ;True  ;True
+fuzzylite                ;True  ;True
 misirli-casalicchio-2024 ;False ;True
 rjoub-bentahar-2017      ;False ;True
 yousif-et-al-2024        ;False ;True
@@ -20,8 +22,7 @@ abubacker-et-al-2023     ;False ;True
 bonomi-et-al-2012        ;False ;True
 keivani-tapamo-2019      ;False ;False
 jang-et-al-2012          ;False ;False
-Hari-et-al-2018          ;False ;False
 alwabi-et-al-2017        ;False ;False
 kraemer-et-al-2017       ;False ;False
 shanhe-et-al-2015        ;False ;False
-fuzzylite                ;False ;False
+shanhe-et-al-2015-survey ;False ;False
