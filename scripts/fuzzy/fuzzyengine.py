@@ -1,8 +1,17 @@
+from ast import arg
 import fuzzylite as fl
-from numpy import minimum
+import numpy as np
+import sys
+
+from fuzzylite.types import Scalar
+
+# create custom 3pi aggregation operator
+class TriplePi(fl.SNorm):
+	def compute(self, x: Scalar, y: Scalar) -> Scalar:
+		result = np.power(np.power(x, 3) + np.power(y, 3), 1/3)
+		return np.clip(result, 0, 1)
 
 # import the engine
-
 engine = fl.Engine(
 	name="TaskOffloading",
 	input_variables=[
@@ -82,7 +91,7 @@ engine = fl.Engine(
 			name="Processing",
 			minimum=0.0,
 			maximum=100.0,
-			aggregation = fl.Maximum(),
+			aggregation = None,
 			defuzzifier=fl.Centroid(200),
 			terms=[
 				fl.Trapezoid("local_processing", 0.0, 12.0, 24.0, 48.0),

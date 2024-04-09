@@ -54,7 +54,7 @@ OutputVariable: Processing
 RuleBlock: 
   enabled: true
   conjunction: Minimum
-  disjunction: NormalizedSum
+  disjunction: Maximum
   activation: Minimum
   rule: if Bandwidth is bw_low then Processing is local_processing
   rule: if Bandwidth is not bw_low and (Datasize is data_high or Datasize is data_medium) then Processing is remote_processing
