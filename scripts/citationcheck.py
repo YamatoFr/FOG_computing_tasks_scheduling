@@ -7,11 +7,20 @@ from bibtexparser.customization import convert_to_unicode
 BIB = 'report/biblio.bib'
 
 def parse_bibtex_file(bibtex_filepath):
-    with open(bibtex_filepath) as bibtex_file:
-        parser = BibTexParser()
-        parser.customization = convert_to_unicode
-        bib_database = bibtexparser.load(bibtex_file, parser=parser)
-    return bib_database
+	"""
+	Parses a BibTeX file and returns the parsed data as a BibDatabase object.
+
+	Args:
+		bibtex_filepath (str): The file path of the BibTeX file to parse.
+
+	Returns:
+		bib_database (BibDatabase): The parsed BibTeX data as a BibDatabase object.
+	"""
+	with open(bibtex_filepath) as bibtex_file:
+		parser = BibTexParser()
+		parser.customization = convert_to_unicode # type: ignore
+		bib_database = bibtexparser.load(bibtex_file, parser=parser)
+	return bib_database
 
 def checker(file_content, bib_database):
 	"""
@@ -74,7 +83,7 @@ def export_table(table, filename):
 		filename (str): name of the .tex file without the extension
 	"""
 
-	filepath = 'documents/' + filename + '_citcheck.csv'
+	filepath = 'documents/citchecks.' + filename + '_citcheck.csv'
 
 	with open(filepath, 'w') as file:
 		file.write('Citation_key;Cited;Checked\n')

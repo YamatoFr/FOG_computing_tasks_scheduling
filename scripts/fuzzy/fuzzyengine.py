@@ -1,13 +1,12 @@
-from ast import arg
 import fuzzylite as fl
 import numpy as np
-import sys
 
 from fuzzylite.types import Scalar
 
 # create custom 3pi aggregation operator
 class TriplePi(fl.SNorm):
 	def compute(self, x: Scalar, y: Scalar) -> Scalar:
+
 		result = np.power(np.power(x, 3) + np.power(y, 3), 1/3)
 		return np.clip(result, 0, 1)
 
@@ -29,7 +28,7 @@ engine = fl.Engine(
 			name="Datasize",
 			minimum=0.0,
 			maximum=600.0,
-			terms=[
+			terms=[               
 				fl.Trapezoid("data_low", 0.0, 0.0, 230.0, 360.0),
 				fl.Trapezoid("data_medium", 250.0, 350.0, 470.0, 590.0),
 				fl.Trapezoid("data_high", 450.0, 540.0, 600.0, 600.0)

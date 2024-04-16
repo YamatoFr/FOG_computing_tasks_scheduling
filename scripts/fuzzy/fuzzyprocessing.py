@@ -1,14 +1,14 @@
 from math import nan
-from numpy import random as rd
+from numpy import random
 from fuzzyengine import TriplePi, engine
 from numpy.random import Generator, PCG64
 import pandas as pd
 import fuzzylite as fl
 
 # random number generator for each input variable
-# bandwidth, battery, load, memory, nb_user min: 0, max: 100
-# datasize min: 0, max: 600
-# vm min: 0, max: 50
+# (bandwidth, battery, load, memory, nb_user) min: 0, max: 100
+# (datasize) min: 0, max: 600
+# (vm) min: 0, max: 50
 
 
 # create an empty table to store the values, the headers are the variables
@@ -137,7 +137,7 @@ def generate_fuzzy_table(engine, table=table, table_copy=table_copy):
 	df_copy = pd.DataFrame(table_copy)
 
 	# save the tables to csv files with ; as separator
-	df.to_csv("documents/fuzzy_results_maximum.csv", sep=";", index=False)
-	df_copy.to_csv("documents/fuzzy_table_triplepi.csv", sep=";", index=False)
+	df.to_csv("documents/fuzzy-results/fuzzy_test_maximum.csv", sep=";", index=False)
+	df_copy.to_csv("documents/fuzzy-results/fuzzy_test_triplepi.csv", sep=";", index=False)
 
 generate_fuzzy_table(engine)
