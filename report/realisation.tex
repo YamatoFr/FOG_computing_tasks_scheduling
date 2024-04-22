@@ -47,6 +47,28 @@ of inputs, the combination can be done using the logical operators "and" and "or
 project, the rules are usually of the form "if Bandwidth is low then processing is local". The rules are generally defined by the user and are based
 on their knowledge of the system.
 
+\subsection{Aggregation}
+
+The aggregation is the process of combining the fuzzy outputs from the rules to get a single fuzzy output. This process relies on S-Norms, and
+must satisfy the following properties:
+\begin{itemize}
+	\item Commutativity: $x * y = y * x$,
+	\item Associativity: $x * (y * z) = (x * y) * z$,
+	\item Monotony: $x \leq y \implies x * z \leq y * z$,
+	\item Neutrality of 0: $x * 0 = x$ for $x \in [0, 1]$.
+\end{itemize}
+
+The most common S-Norms are the maximum and the probabilistic sum. The maximum and probabilistic sum are defined by the following formulas:
+
+\begin{minipage}{0.9685\textwidth}
+	\begin{equation}
+		\text{Maximum: } x * y = \max(x, y)
+	\end{equation}
+	\begin{equation}
+		\text{Probabilistic sum: } x * y = x + y - x \cdot y
+	\end{equation}
+\end{minipage}
+
 \subsection{Defuzzification}
 
 Defuzzification is the process of converting a fuzzy output into a crisp value, there are several methods to do this, the most common one is the
@@ -160,9 +182,25 @@ decided to combine the bandwidth with all the relevant variables. The rules are 
 From these rules we can see that two variables have no impact on the offloading decision, the residual battery charge and the number of virtual
 machines available.
 
+\subsection{Mean 3\texorpdfstring{$\Pi$}{Pi} aggregation operator (M3\texorpdfstring{$\Pi$}{Pi})}
+
+The standard 3$\Pi$ operator was introduced by Yager and Rybalov \cite{yager-rybalov-1998} in 1988, it is a generalization of the probabilistic sum.
+The 3$\Pi$ operator is defined by the following formula:
+\begin{equation}
+	\Pi(x_1, \cdots, x_n) = \frac{\Pi_{j=1}^n x_j}{\Pi_{j=1}^n x_j + \Pi_{j=1}^n (1 - x_j)}
+\end{equation}
+
+We decided to implement a M3$\Pi$ aggregation operator which is derived from the 3$\Pi$ operator, it is defined by the following formula:
+\begin{equation}
+	M3\Pi(x_1, \cdots, x_n) = \frac{\Pi_{j=1}^n (x_j)^{(1/n)}}{\Pi_{j=1}^n (x_j)^{(1/n)} + \Pi_{j=1}^n (1 - x_j)^{(1/n)}}
+\end{equation}
+\begin{equation}
+	M3\Pi(x_1, x_2) = \frac{(x_1 \cdot x_2)^{1/2}}{(x_1 \cdot x_2)^{1/2} + ((1 - x_1) \cdot (1 - x_2))^{1/2}} = \frac{\sqrt{x_1 \cdot x_2}}{\sqrt{x_1 \cdot x_2 + (1 - x_1) \cdot (1 - x_2)}}
+\end{equation}
+
 \subsection{Results}
 
-After running the programs, we exported the results to a CSV file.
+We ran the program with both the Maximum and M3$\Pi$ aggregation operators and compared the results.
 
 \begin{table}
 	\centering
@@ -172,15 +210,34 @@ After running the programs, we exported the results to a CSV file.
 			Bandwidth & Residual       & Data size & VM available & Number of        & Memory & Load & Processing & Fuzzy output                                     \\
 			          & battery charge &           &              & concurrent users &        &      &            &                                                  \\
 			\hline
-			99        & 82             & 239       & 4            & 47               & 12     & 78   & 67.258     & 0.000/local_processing + 0.931/remote_processing \\
-			8         & 46             & 392       & 16           & 60               & 64     & 53   & 51.741     & 0.400/local_processing + 0.600/remote_processing \\
-			90        & 93             & 8         & 46           & 12               & 4      & 5    & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
-			58        & 59             & 529       & 42           & 85               & 72     & 74   & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
-			33        & 19             & 435       & 21           & 78               & 71     & 78   & 40.546     & 0.700/local_processing + 0.300/remote_processing \\
-			81        & 36             & 373       & 22           & 93               & 63     & 24   & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
-			20        & 85             & 376       & 10           & 83               & 2      & 90   & 21.6       & 1.000/local_processing + 0.000/remote_processing \\
+			52        & 94             & 295       & 2            & 94               & 90     & 60   & 67.542     & 0.000/local_processing + 0.500/remote_processing \\
+			99        & 30             & 65        & 8            & 7                & 4      & 56   & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
+			19        & 26             & 137       & 2            & 97               & 19     & 63   & 25.872     & 0.950/local_processing + 0.050/remote_processing \\
+			13        & 49             & 393       & 13           & 77               & 98     & 88   & 42.664     & 0.650/local_processing + 0.350/remote_processing \\
+			96        & 75             & 117       & 44           & 87               & 18     & 18   & 67.228     & 0.000/local_processing + 1.000/remote_processing \\
+			34        & 22             & 193       & 38           & 64               & 10     & 65   & 44.635     & 0.600/local_processing + 0.400/remote_processing \\
 			\hline
 		\end{tabular}}
-	\caption{Sample results from the fuzzy engine.}
+	\caption{Sample results from the fuzzy engine with the Maximum aggregation operator.}
 	\label{tab:fuzzy-results}
+\end{table}
+
+\begin{table}
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+			\hline
+			Bandwidth & Residual       & Data size & VM available & Number of        & Memory & Load & Processing & Fuzzy output                                     \\
+			          & battery charge &           &              & concurrent users &        &      &            &                                                  \\
+			\hline
+			52        & 94             & 295       & 2            & 94               & 90     & 60   & 67.542     & 0.000/local_processing + 0.630/remote_processing \\
+			99        & 30             & 65        & 8            & 7                & 4      & 56   & 67.332     & 0.000/local_processing + 1.000/remote_processing \\
+			19        & 26             & 137       & 2            & 97               & 19     & 63   & 26.878     & 0.950/local_processing + 0.063/remote_processing \\
+			13        & 49             & 393       & 13           & 77               & 98     & 88   & 42.662     & 0.650/local_processing + 0.350/remote_processing \\
+			96        & 75             & 117       & 44           & 87               & 18     & 18   & 67.332     & 0.000/local_processing + 1.000/remote_processing \\
+			34        & 22             & 193       & 38           & 64               & 10     & 65   & 47.319     & 0.600/local_processing + 0.504/remote_processing \\
+			\hline
+		\end{tabular}}
+	\caption{Sample results from the fuzzy engine with the 3$\Pi$ aggregation operator.}
+	\label{tab:fuzzy-results-3pi}
 \end{table}
