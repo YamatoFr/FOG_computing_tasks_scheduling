@@ -1,6 +1,5 @@
 from math import nan
-from numpy import random
-from fuzzyengine import TriplePi, engine
+from fuzzyengine import Mean3Pi, engine
 from numpy.random import Generator, PCG64
 import pandas as pd
 import fuzzylite as fl
@@ -84,7 +83,7 @@ def process_engine(engine, table=table, table_copy=table_copy):
 	table["Fuzzy_output"].append(engine.output_variable("Processing").fuzzy_value())
 
 	# set the aggregation method to TriplePi
-	engine.output_variable("Processing").aggregation = TriplePi()
+	engine.output_variable("Processing").aggregation = Mean3Pi()
 
 	engine.process()
 
@@ -99,7 +98,7 @@ def process_engine(engine, table=table, table_copy=table_copy):
 def generate_fuzzy_table(engine, table=table, table_copy=table_copy):
 
 	# loop through the input variables and set the values
-	for i in range(0, 500):
+	for i in range(0, 50):
 		# print the iteration number
 		print("\nIteration: ", i+1)
 

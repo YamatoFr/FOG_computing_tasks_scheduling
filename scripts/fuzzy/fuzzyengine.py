@@ -4,11 +4,18 @@ import numpy as np
 from fuzzylite.types import Scalar
 
 # create custom 3pi aggregation operator
-class TriplePi(fl.SNorm):
-	def compute(self, x: Scalar, y: Scalar) -> Scalar:
+class Mean3Pi(fl.SNorm):
+	def compute(self, a: Scalar, b: Scalar) -> Scalar:
 
-		result = np.power(np.power(x, 3) + np.power(y, 3), 1/3)
-		return np.clip(result, 0, 1)
+		a = fl.scalar(a)
+		b = fl.scalar(b)
+
+		print("a: ", a, "\nb: ", b, "\n")
+
+		numerator = np.sqrt(a) * np.sqrt(b)
+		denominator = np.sqrt(a) * np.sqrt(b) + np.sqrt(1 - a) * np.sqrt(1-  b)
+
+		return numerator / denominator
 
 # import the engine
 engine = fl.Engine(
