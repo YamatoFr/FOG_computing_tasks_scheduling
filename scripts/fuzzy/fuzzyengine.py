@@ -108,3 +108,5 @@ engine = fl.Engine(
 		)
     ]
 )
+
+fl.FllExporter().to_file("scripts/fuzzy/task_offloading.fll", engine)
