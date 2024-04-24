@@ -13,9 +13,7 @@ import fuzzylite as fl
 # create an empty table to store the values, the headers are the variables
 table = {
 	"Bandwidth": [],
-	"Residual_bat_charge": [],
 	"Datasize": [],
-	"VM_available": [],
 	"NB_concurrent_users": [],
 	"Memory": [],
 	"Load": [],
@@ -26,9 +24,7 @@ table = {
 # create a copy of the table
 table_copy = {
 	"Bandwidth": [],
-	"Residual_bat_charge": [],
 	"Datasize": [],
-	"VM_available": [],
 	"NB_concurrent_users": [],
 	"Memory": [],
 	"Load": [],
@@ -39,10 +35,8 @@ table_copy = {
 # define the input variables for ease of use
 bandwidth = engine.input_variable("Bandwidth")
 datasize = engine.input_variable("Datasize")
-battery = engine.input_variable("Residual_bat_charge")
 load = engine.input_variable("Load")
 memory = engine.input_variable("Memory")
-vm = engine.input_variable("VM_available")
 nb_users = engine.input_variable("NB_concurrent_users")
 
 def random_input(min, max):
@@ -105,27 +99,21 @@ def generate_fuzzy_table(engine, table=table, table_copy=table_copy):
 		# set the input values
 		bandwidth.value = random_input(1, 100)
 		datasize.value = random_input(1, 600)
-		battery.value = random_input(1, 100)
 		load.value = random_input(1, 100)
 		memory.value = random_input(1, 100)
-		vm.value = random_input(1, 50)
 		nb_users.value = random_input(1, 100)
 
 		# store the values in the tables 
 		table["Bandwidth"].append(bandwidth.value)
 		table["Datasize"].append(datasize.value)
-		table["Residual_bat_charge"].append(battery.value)
 		table["Load"].append(load.value)
 		table["Memory"].append(memory.value)
-		table["VM_available"].append(vm.value)
 		table["NB_concurrent_users"].append(nb_users.value)
 
 		table_copy["Bandwidth"].append(bandwidth.value)
 		table_copy["Datasize"].append(datasize.value)
-		table_copy["Residual_bat_charge"].append(battery.value)
 		table_copy["Load"].append(load.value)
 		table_copy["Memory"].append(memory.value)
-		table_copy["VM_available"].append(vm.value)
 		table_copy["NB_concurrent_users"].append(nb_users.value)
 
 

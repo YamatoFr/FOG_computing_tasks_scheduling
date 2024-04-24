@@ -10,7 +10,7 @@ class Mean3Pi(fl.SNorm):
 		a = fl.scalar(a)
 		b = fl.scalar(b)
 
-		print("a: ", a, "\nb: ", b, "\n")
+		# print("a: ", a, "\nb: ", b, "\n")
 
 		numerator = np.sqrt(a) * np.sqrt(b)
 		denominator = np.sqrt(a) * np.sqrt(b) + np.sqrt(1 - a) * np.sqrt(1-  b)
@@ -42,16 +42,6 @@ engine = fl.Engine(
 			]
 		),
 		fl.InputVariable(
-			name="Residual_bat_charge",
-			minimum=0.0,
-			maximum=100.0,
-			terms=[
-				fl.Trapezoid("bat_low", 0.0, 0.0, 25.0, 35.0),
-				fl.Trapezoid("bat_medium", 25.0, 40.0, 60.0, 75.0),
-				fl.Trapezoid("bat_high", 60.0, 75.0, 100.0, 100.0)
-			]
-		),
-		fl.InputVariable(
 			name="Load",
 			minimum=0.0,
 			maximum=100.0,
@@ -69,16 +59,6 @@ engine = fl.Engine(
 				fl.Trapezoid("mem_low", 0.0, 0.0, 25.0, 40.0),
 				fl.Trapezoid("mem_medium", 35.0, 45.0, 60.0, 70.0),
 				fl.Trapezoid("mem_high", 65.0, 80.0, 100.0, 100.0)
-			]
-		),
-		fl.InputVariable(
-			name="VM_available",
-			minimum=0.0,
-			maximum=50.0,
-			terms=[
-				fl.Trapezoid("vm_low", 0.0, 0.0, 15.0, 20.0),
-				fl.Trapezoid("vm_medium", 15.0, 22.0, 27.0, 35.0),
-				fl.Trapezoid("vm_high", 30.0, 35.0, 50.0, 50.0)
 			]
 		),
 		fl.InputVariable(
