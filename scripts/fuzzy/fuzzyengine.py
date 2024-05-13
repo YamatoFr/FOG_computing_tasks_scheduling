@@ -41,9 +41,20 @@ class Mean3Pi(fl.SNorm):
 			numerator = np.sqrt(a) * np.sqrt(b)
 			denominator = np.sqrt(a) * np.sqrt(b) + np.sqrt(1 - a) * np.sqrt(1-  b)
 
-			return numerator / denominator
-		else:
-			return 0.01
+			result = numerator / denominator
+			print("result", result)
+
+			return result
+
+		elif check_zeros(a) or check_zeros(b):
+			if not check_zeros(a) and check_zeros(b):
+				print("a", np.sqrt(a) / (np.sqrt(a) + np.sqrt(1 - a)))
+				return np.sqrt(a) / (np.sqrt(a) + np.sqrt(1 - a))
+			elif check_zeros(a) and not check_zeros(b):
+				print("b", np.sqrt(b) / (np.sqrt(b) + np.sqrt(1 - b)))
+				return np.sqrt(b) / (np.sqrt(b) + np.sqrt(1 - b))
+
+		return 0.0
 
 class AggregatedMean3Pi(fl.Aggregated):
 	def membership(self, x: Scalar) -> Scalar:
@@ -62,11 +73,9 @@ class AggregatedMean3Pi(fl.Aggregated):
 		y = fl.scalar(0.0)
 		
 		for term in self.terms:
-			print("x1", x, "\nterm.membership(x)", term.membership(x))
 
 			if not check_zeros(x):
-				print("x2", x, "\nterm.membership(x)", term.membership(x))
-
+				print("x", x, term, term.membership(x))
 				y = self.aggregation.compute(y, term.membership(x))  # type: ignore
 				print("y", y)
 			

@@ -39,7 +39,7 @@ OutputVariable: Processing
   range: 0.000 100.000
   lock-range: false
   aggregation: none
-  defuzzifier: Centroid 200
+  defuzzifier: Centroid 10
   default: nan
   lock-previous: false
   term: local_processing Trapezoid 0.000 12.000 24.000 48.000

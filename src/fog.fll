@@ -11,12 +11,6 @@ InputVariable: Datasize
   term: data_low Trapezoid 0.000 0.000 230.000 360.000
   term: data_medium Trapezoid 250.000 350.000 470.000 590.000
   term: data_high Trapezoid 450.000 540.000 600.000 600.000
-InputVariable: Residual_bat_charge
-  enabled: true
-  range: 0.000 100.000
-  term: bat_low Trapezoid 0.000 0.000 25.000 35.000
-  term: bat_medium Trapezoid 25.000 40.000 60.000 75.000
-  term: bat_high Trapezoid 60.000 75.000 100.000 100.000
 InputVariable: Load
   enabled: true
   range: 0.000 100.000
@@ -29,12 +23,6 @@ InputVariable: Memory
   term: mem_low Trapezoid 0.000 0.000 25.000 40.000
   term: mem_medium Trapezoid 35.000 45.000 60.000 70.000
   term: mem_high Trapezoid 65.000 80.000 100.000 100.000
-InputVariable: VM_available
-  enabled: true
-  range: 0.000 50.000
-  term: vm_low Trapezoid 0.000 0.000 15.000 20.000
-  term: vm_medium Trapezoid 15.000 22.500 27.500 35.000
-  term: vm_high Trapezoid 30.000 35.500 50.000 50.000
 InputVariable: NB_concurrent_users
   enabled: true
   range: 0.000 100.000
