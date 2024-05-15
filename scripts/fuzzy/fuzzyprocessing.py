@@ -1,4 +1,5 @@
 from math import nan
+import random
 from fuzzyengine import Mean3Pi, AggregatedMean3Pi, engine
 from numpy.random import Generator, PCG64
 import pandas as pd
@@ -39,7 +40,7 @@ load      = engine.input_variable("Load")
 memory    = engine.input_variable("Memory")
 nb_users  = engine.input_variable("NB_concurrent_users")
 
-def random_input(min, max):
+def random_input(min, max, seed):
 	"""
 	Generates a random integer between the given minimum and maximum values.
 
@@ -50,7 +51,7 @@ def random_input(min, max):
 	Returns:
 	int: A random integer between min and max (inclusive).
 	"""
-	rng = Generator(PCG64())
+	rng = Generator(PCG64(seed))
 	value = rng.integers(min, max)
 	return value
 
@@ -78,7 +79,7 @@ def process_engine(engine, table=table, table_copy=table_copy):
 	table["Fuzzy_output"].append(engine.output_variable("Processing").fuzzy_value())
 
 	# set the aggregation method to TriplePi
-	engine.output_variable("Processing").fuzzy = AggregatedMean3Pi("Processing", 0, 100, Mean3Pi())
+	engine.output_variable("Processing").fuzzy = fl.Aggregated("Processing", 0, 100, fl.BoundedSum())
 
 	engine.process()
 
@@ -95,16 +96,16 @@ def process_engine(engine, table=table, table_copy=table_copy):
 def generate_fuzzy_table(engine, table=table, table_copy=table_copy):
 
 	# loop through the input variables and set the values
-	for i in range(0, 1):
+	for i in range(0, 50):
 		# print the iteration number
 		print("\nIteration: ", i+1)
 
 		# set the input values
-		bandwidth.value = 28
-		datasize.value  = 300
-		load.value      = 85
-		memory.value    = 68
-		nb_users.value  = 32
+		bandwidth.value = random_input(0, 100, i)
+		datasize.value  = random_input(0, 600, i)
+		load.value      = random_input(0, 100, i + 20)
+		memory.value    = random_input(0, 100, i + 30)
+		nb_users.value  = random_input(0, 100, i + 40)
 
 		# store the values in the tables 
 		table["Bandwidth"].append(bandwidth.value)
