@@ -83,7 +83,7 @@ def export_table(table, filename):
 		filename (str): name of the .tex file without the extension
 	"""
 
-	filepath = 'documents/citchecks.' + filename + '_citcheck.csv'
+	filepath = 'documents/citchecks/' + filename + '_citcheck.csv'
 
 	with open(filepath, 'w') as file:
 		file.write('Citation_key;Cited;Checked\n')

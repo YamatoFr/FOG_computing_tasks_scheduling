@@ -1,9 +1,120 @@
+\chapter{Internet of Things (IoT)}
+\label{chap:iot}
+
+The Internet of Things (IoT) is a network of interconnected devices that can communicate with each other and exchange
+data. These devices can be anything from smartphones and laptops to sensors and actuators. The IoT is a rapidly growing
+field with many applications in various industries like healthcare, agriculture, transportation, and manufacturing. The
+goal of the IoT is to make our lives easier by automating tasks and providing real-time information. It is made
+possible by advances in wireless communication, sensor technology, and cloud computing. These technologies allow devices
+to connect to the internet and share data with each other and the cloud. The IoT has many benefits like improved
+efficiency, reduced costs, and increased safety. However, it also has some challenges like security, privacy, and
+interoperability.
+
+\section{History}
+\label{sec:iot-history}
+
+The concept and the term "Internet of Things" can be traced back to the 1985 during a speech by Peter T. Lewis to the
+Congressional Black Caucus Foundation.\cite{chetansharma-2016} He said: "The Internet of Things, or IoT, is the
+integration of people, processes and technology with connectable devices and sensors to enable remote monitoring,
+status, manipulation and evaluation of trends of such devices." The term was later popularized by Kevin Ashton in
+1999.\cite{ashton-2009}
+
+The first internet-connected (previously known as ARPANET) device was a Coca-Cola vending machine at Carnegie Mellon
+University in 1982,\cite{cscmuedu} it was able to report its inventory and temperature to the network. Since then,
+the IoT has grown rapidly with the advent of wireless communication, sensor technology, and cloud computing.
+
+Cisco Systems estimated that the number of internet-connected devices exceeded the number of people on Earth between
+2008 and 2009,\cite{evans-2011} marking the beginning of the IoT era. Today, there are billions of IoT devices around
+the world, and the number will continue to grow as more devices become connected.
+
+\section{Architecture}
+\label{sec:iot-architecture}
+
+The IoT architecture consists of three layers: the perception layer, the network layer, and the application layer.
+\begin{itemize}
+	\item The perception layer is where the devices are located, it includes sensors, actuators, and other devices that
+	      collect data and interact with the physical world.
+	\item The network layer is where the devices communicate with each other and the cloud, it includes wireless
+	      communication technologies like Wi-Fi, Bluetooth, and Zigbee.
+	\item The application layer is where the data is processed and analyzed, it includes cloud computing services like
+	      Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform.
+\end{itemize}
+
+The IoT architecture is designed to be scalable, flexible, and secure. It allows devices to connect to the internet and
+share data with each other and the cloud. This enables new applications and services that were not possible before. The
+IoT architecture is still evolving with new technologies like edge computing and fog computing. These technologies bring
+the cloud closer to the devices and reduce latency and bandwidth requirements.
+
+\section{Applications}
+\label{sec:iot-applications}
+
+\subsection{Home automation}
+\label{subsec:iot-home-automation}
+
+One of the most popular applications of the IoT is home automation, it allows homeowners to control many aspects of their
+home like lighting, heating, and security. Smart devices like thermostats, light bulbs, and cameras can be connected to
+the internet and controlled remotely using a smartphone or voice assistant.
+
+Home automation can help homeowners save energy, improve security, and make their lives more convenient. It is also a
+growing market with many companies offering smart home products and services, like Google Home, Amazon Echo, and Apple
+HomeKit. Non-proprietary solutions are also available, like Home Assistant, OpenHAB, and Domoticz.
+
+\subsection{Healthcare}
+\label{subsec:iot-healthcare}
+
+IoT has many applications in healthcare, it can be used to monitor patients, track medications, and manage chronic diseases.
+Wearable devices like smartwatches and fitness trackers can collect data on a patient's heart rate, blood pressure, and
+activity level. This data can be sent to a healthcare provider for analysis and diagnosis. The IoT can also be used to monitor
+patients in hospitals and nursing homes, it can alert healthcare providers if a patient's condition changes. The IoT can help
+improve patient outcomes, reduce costs, and increase access to care.
+
+However, it also raises concerns about privacy, security, and data ownership. The Health Insurance Portability and Accountability
+Act (HIPAA)[\href{https://www.hhs.gov/hipaa/for-professionals/privacy/index.html}{HIPAA privacy rule}] in the United States
+and the General Data Protection Regulation
+(GDPR)[\href{https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre1#Article4}{article 4-15}] in the European
+Union are two regulations that govern the use of healthcare data.
+
+\subsection{Energy management}
+\label{subsec:iot-energy-management}
+
+Homeowners can monitor and control their energy usage using with many IoT devices, this principle can be extended to a larger
+scale with smart grids. Smart grids are electrical grids that use IoT devices to monitor and control the flow of electricity.
+They can help utilities reduce costs, improve reliability, and increase efficiency. They can also help reduce greenhouse gas
+emissions and promote renewable energy sources. It is a growing field with many companies offering smart grid products and
+services, like Siemens, ABB, and Schneider Electric.
+
+\chapter{FOG computing}
+\label{chap:fog}
+
+FOG computing was introduced by Cisco in 2012 as a way to extend cloud computing to the edge of the network. The goal
+of FOG computing is to bring the cloud closer to the end-users, this is done by placing the cloud's resources at the
+edge of the network thanks to a wider geographical distribution.
+
+\section{Concept}
+\label{sec:fog-concept}
+
+FOG computing is a virtualized and decentralized computing platform that acts as an intermediary between the cloud and
+the edge devices. The word "fog" is used to describe the cloud-like properties being closer to the "ground", the ground
+being the edge devices. Many of these devices will generate a huge amount or raw data that needs to be processed in real
+time, this is where FOG computing comes in. Instead of sending all the data to the cloud for processing, the data is
+processed on FOG nodes. The nodes can be anything from resource-rich servers to resource-constrained devices like
+gateways, routers or other end devices.
+
+It is designed to reduce latency, provide computing resources, storage and network services to the edge
+devices. It also provides location awareness, mobility support, and real-time data processing. FOG computing is ideal
+for applications that require real-time processing, like autonomous vehicles, industrial automation, and augmented
+reality.
+
+\section{Architecture}
+\label{sec:fog-architecture}
+
 \chapter{Offloading using Fuzzy logic}
 \label{chap:fuzzy}
 
 \section{Introduction}
+\label{sec:fuzzy-intro}
 
-Introduced in 1965 by Lotfi Zadeh\cite{zadeh-1965}, fuzzy logic is based on a "degree of truth" instead of a finite
+Introduced in 1965 by Lotfi Zadeh,\cite{zadeh-1965} fuzzy logic is based on a "degree of truth" instead of a finite
 value, usually 0 or 1, it aims to represent the vagueness of human language and thought. Fuzzy systems are the means
 to implement fuzzy logic, they are two types of fuzzy systems: Mamdani and Sugeno, both are similar but differ in the
 way the output is determined. The most common one Mamdani and it's the one we will be using in this project. The
@@ -15,7 +126,11 @@ Mamdani fuzzy system follows three steps:
 	\item the fuzzy output is defuzzified to get a crisp value.
 \end{itemize}
 
+While Sugeno includes the defuzzification step in the rule evaluation step, this system works well with optimization
+algorithms and is more computationally efficient than the Mamdani system.
+
 \subsection{Fuzzification}
+\label{subsec:fuzzy-fuzzification}
 
 Fuzzification is the process of converting a crisp value into a fuzzy value, this is done by assigning a membership
 function to the input value. The membership function is a curve that defines how much the input value belongs to a
@@ -45,6 +160,7 @@ The trapezoidal function is defined by the parameters $a$, $b$, $c$ and $d$ and 
 \end{equation}
 
 \subsection{Rule evaluation}
+\label{subsec:fuzzy-rule-evaluation}
 
 The rule evaluation is the process of determining the fuzzy output based on the fuzzy inputs and a set of rules. The
 rules are defined by two parts: the "if" or antecedent part and the "then" or consequent part. The antecedent part
@@ -54,6 +170,7 @@ are usually of the form "if Bandwidth is low then processing is local". The rule
 and are based on their knowledge of the system.
 
 \subsection{Aggregation}
+\label{subsec:fuzzy-aggregation}
 
 The aggregation is the process of combining the fuzzy outputs from the rules to get a single fuzzy output. This process
 relies on T-conorms, and must satisfy the following properties:
@@ -79,7 +196,7 @@ As opposed to T-norms which are \textit{negative reinforcement} operators:
 
 The most common T-conorms are the maximum, the probabilistic sum and the bounded sum. They are defined as follows:
 
-\begin{minipage}{0.9685\textwidth}
+\begin{minipage}{0.9624\textwidth}
 	\begin{equation}
 		\text{Maximum: } x \oplus y = \max(x, y)
 	\end{equation}
@@ -92,6 +209,7 @@ The most common T-conorms are the maximum, the probabilistic sum and the bounded
 \end{minipage}
 
 \subsection{Defuzzification}
+\label{subsec:fuzzy-defuzzification}
 
 Defuzzification is the process of converting a fuzzy output into a crisp value, there are several methods to do this,
 the most common one is the centroid method. The centroid method calculates the center of mass of the fuzzy output, this
@@ -108,11 +226,13 @@ most common method because it is simple and easy to implement. However, it is no
 like the mean of maximum and the largest of maximum can be used depending on the application.
 
 \section{Fuzzy system for offloading}
+\label{sec:fuzzy-offloading}
 
 \subsection{Setting up the engine}
+\label{subsec:fuzzy-setup}
 
 To demonstrate the use of fuzzy logic in offloading, we wrote two simple programs in Python. The goal was to recreate
-the experiment done by Hari et al.\cite{Hari-et-al-2018}. The first program uses the pyfuzzylite\cite{fuzzylite} library
+the experiment done by Hari et al.\cite{Hari-et-al-2018} The first program uses the pyfuzzylite\cite{fuzzylite} library
 to implement a fuzzy engine with all the variables and rules needed to determine the offloading decision. The second
 program uses the NumPy library to generate random values for the inputs and then uses the fuzzy engine to determine
 the offloading decision. The fuzzy engine is defined by the variables shown in table \ref{tab:fuzzy-input} and
@@ -222,8 +342,7 @@ generalization of the probabilistic sum. The 3$\Pi$ operator is defined by the f
 \end{equation}
 
 Unlike T-norms and T-conorms, the 3$\Pi$ operator is \textit{full reinforced} which means that it satisfies the
-properties of both positive
-and negative reinforcement operators.
+properties of both positive and negative reinforcement operators.
 
 We decided to implement a M3$\Pi$ aggregation operator which is derived from the 3$\Pi$ operator, it is defined by the
 following formula:
@@ -299,5 +418,3 @@ maximum, probabilistic sum and bounded sum. Samples of the results are shown in 
 	\caption{Sample results from the fuzzy engine with the Bounded sum aggregation operator.}
 	\label{tab:fuzzy-results-bounded}
 \end{table}
-
-\section{AI-based task scheduler}
