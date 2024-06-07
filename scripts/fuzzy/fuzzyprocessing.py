@@ -1,5 +1,4 @@
 from math import nan
-import random
 from fuzzyengine import Mean3Pi, AggregatedMean3Pi, engine
 from numpy.random import Generator, PCG64
 import pandas as pd
@@ -40,7 +39,7 @@ load      = engine.input_variable("Load")
 memory    = engine.input_variable("Memory")
 nb_users  = engine.input_variable("NB_concurrent_users")
 
-def random_input(min, max, seed):
+def random_input(min, max):
 	"""
 	Generates a random integer between the given minimum and maximum values.
 
@@ -51,7 +50,7 @@ def random_input(min, max, seed):
 	Returns:
 	int: A random integer between min and max (inclusive).
 	"""
-	rng = Generator(PCG64(seed))
+	rng = Generator(PCG64())
 	value = rng.integers(min, max)
 	return value
 
@@ -79,7 +78,7 @@ def process_engine(engine, table=table, table_copy=table_copy):
 	table["Fuzzy_output"].append(engine.output_variable("Processing").fuzzy_value())
 
 	# set the aggregation method to TriplePi
-	engine.output_variable("Processing").fuzzy = fl.Aggregated("Processing", 0, 100, fl.BoundedSum())
+	engine.output_variable("Processing").fuzzy = AggregatedMean3Pi("Processing", 0, 100, Mean3Pi())
 
 	engine.process()
 
@@ -96,16 +95,22 @@ def process_engine(engine, table=table, table_copy=table_copy):
 def generate_fuzzy_table(engine, table=table, table_copy=table_copy):
 
 	# loop through the input variables and set the values
-	for i in range(0, 50):
+	for i in range(0, 5000):
 		# print the iteration number
 		print("\nIteration: ", i+1)
 
 		# set the input values
-		bandwidth.value = random_input(0, 100, i)
-		datasize.value  = random_input(0, 600, i)
-		load.value      = random_input(0, 100, i + 20)
-		memory.value    = random_input(0, 100, i + 30)
-		nb_users.value  = random_input(0, 100, i + 40)
+		bandwidth.value = random_input(1, 100)
+		datasize.value  = random_input(1, 600)
+		load.value      = random_input(1, 100.)
+		memory.value    = random_input(1, 100.)
+		nb_users.value  = random_input(1, 100.)
+
+		# print("Bandwidth: ", bandwidth.fuzzy_value())
+		# print("Datasize: ", datasize.fuzzy_value())
+		# print("Load: ", load.fuzzy_value())
+		# print("Memory: ", memory.fuzzy_value())
+		# print("NB_concurrent_users: ", nb_users.fuzzy_value())
 
 		# store the values in the tables 
 		table["Bandwidth"].append(bandwidth.value)
@@ -127,7 +132,7 @@ def generate_fuzzy_table(engine, table=table, table_copy=table_copy):
 	df_copy = pd.DataFrame(table_copy)
 
 	# save the tables to csv files with ; as separator
-	df.to_csv("documents/fuzzy-results/fuzzy_test_maximum.csv", sep=";", index=False)
+	df.to_csv("documents/fuzzy-results/fuzzy_test_max.csv", sep=",", index=False)
 	df_copy.to_csv("documents/fuzzy-results/fuzzy_test_triplepi.csv", sep=";", index=False)
 
 generate_fuzzy_table(engine)

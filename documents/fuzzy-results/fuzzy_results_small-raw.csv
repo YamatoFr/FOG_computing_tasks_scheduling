@@ -1,0 +1,22 @@
+Bandwidth,Residual_bat_charge,Datasize,VM_available,NB_concurrent_users,Memory,Load,Processing,Fuzzy_output
+37,11,291,6,92,53,42,53.571,0.300/local_processing + 0.531/remote_processing
+59,57,200,28,60,24,27,67.228,0.000/local_processing + 1.000/remote_processing
+38,13,4,20,16,36,2,58.912,0.200/local_processing + 0.800/remote_processing
+51,28,150,29,4,33,53,67.228,0.000/local_processing + 1.000/remote_processing
+62,58,275,16,80,79,52,67.425,0.000/local_processing + 0.654/remote_processing
+83,39,326,16,22,99,52,67.367,0.000/local_processing + 0.738/remote_processing
+93,6,146,17,50,81,29,39.026,0.733/local_processing + 0.267/remote_processing
+73,53,19,1,21,83,37,67.228,0.000/local_processing + 1.000/remote_processing
+24,75,523,12,38,92,24,21.6,1.000/local_processing + 0.000/remote_processing
+42,2,414,42,71,75,56,67.228,0.000/local_processing + 1.000/remote_processing
+91,18,49,23,77,91,92,67.228,0.000/local_processing + 1.000/remote_processing
+46,16,285,9,66,80,43,67.482,0.000/local_processing + 0.577/remote_processing
+72,27,334,49,48,97,53,67.328,0.000/local_processing + 0.800/remote_processing
+68,63,392,11,84,48,85,67.228,0.000/local_processing + 1.000/remote_processing
+52,54,422,17,6,63,29,67.228,0.000/local_processing + 1.000/remote_processing
+4,56,264,29,77,93,38,58.637,0.200/local_processing + 0.738/remote_processing
+92,44,380,5,96,46,33,67.228,0.000/local_processing + 1.000/remote_processing
+94,12,1,16,37,87,25,35.665,0.800/local_processing + 0.200/remote_processing
+39,22,373,44,63,77,58,62.867,0.100/local_processing + 0.900/remote_processing
+99,75,463,36,12,82,80,67.228,0.000/local_processing + 1.000/remote_processing
+30,87,109,40,33,1,30,21.6,1.000/local_processing + 0.000/remote_processing

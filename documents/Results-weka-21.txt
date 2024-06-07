@@ -1,0 +1,69 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     fuzzy_results_maximum copy
+Instances:    21
+Attributes:   7
+              Bandwidth
+              Datasize
+              NB_concurrent_users
+              Memory
+              Load
+              Processing
+              Fuzzy_output
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+Processing <= 62.867
+|   Bandwidth <= 37
+|   |   NB_concurrent_users <= 50: 1.000/local_processing + 0.000/remote_processing (2.0)
+|   |   NB_concurrent_users > 50: 0.300/local_processing + 0.531/remote_processing (2.0/1.0)
+|   Bandwidth > 37
+|   |   Bandwidth <= 62: 0.200/local_processing + 0.800/remote_processing (2.0/1.0)
+|   |   Bandwidth > 62: 0.733/local_processing + 0.267/remote_processing (2.0/1.0)
+Processing > 62.867
+|   Processing <= 67.228: 0.000/local_processing + 1.000/remote_processing (9.0)
+|   Processing > 67.228
+|   |   Bandwidth <= 62: 0.000/local_processing + 0.654/remote_processing (2.0/1.0)
+|   |   Bandwidth > 62: 0.000/local_processing + 0.738/remote_processing (2.0/1.0)
+
+Number of Leaves  : 	7
+
+Size of the tree : 	13
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances           9               42.8571 %
+Incorrectly Classified Instances        12               57.1429 %
+Kappa statistic                          0.2566
+Mean absolute error                      0.0899
+Root mean squared error                  0.2524
+Relative absolute error                 63.2311 %
+Root relative squared error             95.3374 %
+Total Number of Instances               21     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,000    0,200    0,000      0,000    0,000      -0,108   0,375     0,048     0.300/local_processing + 0.531/remote_processing
+                 1,000    0,083    0,900      1,000    0,947      0,908    0,958     0,900     0.000/local_processing + 1.000/remote_processing
+                 0,000    0,050    0,000      0,000    0,000      -0,050   0,450     0,048     0.200/local_processing + 0.800/remote_processing
+                 0,000    0,150    0,000      0,000    0,000      -0,091   0,425     0,048     0.000/local_processing + 0.654/remote_processing
+                 0,000    0,050    0,000      0,000    0,000      -0,050   0,425     0,048     0.000/local_processing + 0.738/remote_processing
+                 0,000    0,050    0,000      0,000    0,000      -0,050   0,475     0,048     0.733/local_processing + 0.267/remote_processing
+                 0,000    0,053    0,000      0,000    0,000      -0,073   0,947     0,667     1.000/local_processing + 0.000/remote_processing
+                 0,000    0,000    ?          0,000    ?          ?        0,425     0,048     0.000/local_processing + 0.577/remote_processing
+                 0,000    0,000    ?          0,000    ?          ?        0,425     0,048     0.000/local_processing + 0.800/remote_processing
+                 0,000    0,000    ?          0,000    ?          ?        0,450     0,048     0.200/local_processing + 0.738/remote_processing
+                 0,000    0,000    ?          0,000    ?          ?        0,475     0,048     0.800/local_processing + 0.200/remote_processing
+                 0,000    0,000    ?          0,000    ?          ?        0,425     0,048     0.100/local_processing + 0.900/remote_processing
+Weighted Avg.    0,429    0,065    ?          0,429    ?          ?        0,708     0,472     
+

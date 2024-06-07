@@ -1,0 +1,22 @@
+Bandwidth ,Datasize ,NB_concurrent_users ,Memory ,Load , Fuzzy_output
+       37 ,     291 ,                 92 ,    53 ,  42 , remote_processing
+       59 ,     200 ,                 60 ,    24 ,  27 , remote_processing
+       38 ,       4 ,                 16 ,    36 ,   2 , remote_processing
+       51 ,     150 ,                  4 ,    33 ,  53 , remote_processing
+       62 ,     275 ,                 80 ,    79 ,  52 , remote_processing
+       83 ,     326 ,                 22 ,    99 ,  52 , remote_processing
+       93 ,     146 ,                 50 ,    81 ,  29 , local_processing
+       73 ,      19 ,                 21 ,    83 ,  37 , remote_processing
+       24 ,     523 ,                 38 ,    92 ,  24 , local_processing
+       42 ,     414 ,                 71 ,    75 ,  56 , remote_processing
+       91 ,      49 ,                 77 ,    91 ,  92 , remote_processing
+       46 ,     285 ,                 66 ,    80 ,  43 , remote_processing
+       72 ,     334 ,                 48 ,    97 ,  53 , remote_processing
+       68 ,     392 ,                 84 ,    48 ,  85 , remote_processing
+       52 ,     422 ,                  6 ,    63 ,  29 , remote_processing
+        4 ,     264 ,                 77 ,    93 ,  38 , remote_processing
+       92 ,     380 ,                 96 ,    46 ,  33 , remote_processing
+       94 ,       1 ,                 37 ,    87 ,  25 , local_processing
+       39 ,     373 ,                 63 ,    77 ,  58 , remote_processing
+       99 ,     463 ,                 12 ,    82 ,  80 , remote_processing
+       30 ,     109 ,                 33 ,     1 ,  30 , local_processing

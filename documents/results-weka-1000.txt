@@ -1,0 +1,79 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     data-weka.filters.unsupervised.attribute.Remove-R6
+Instances:    1000
+Attributes:   6
+              Bandwidth
+              Datasize
+              NB_concurrent_users
+              Memory
+              Load
+              Fuzzy_output
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+Bandwidth <= 35
+|   Bandwidth <= 9
+|   |   Load <= 32
+|   |   |   Datasize <= 256
+|   |   |   |   NB_concurrent_users <= 26: remote_processing (4.0)
+|   |   |   |   NB_concurrent_users > 26
+|   |   |   |   |   Bandwidth <= 8: local_processing (7.0)
+|   |   |   |   |   Bandwidth > 8: remote_processing (2.0)
+|   |   |   Datasize > 256: remote_processing (20.0)
+|   |   Load > 32: remote_processing (75.0)
+|   Bandwidth > 9
+|   |   Bandwidth <= 34
+|   |   |   Bandwidth <= 11
+|   |   |   |   Bandwidth <= 10: 0.500/local_processing + 0.500/remote_processing (6.0/1.0)
+|   |   |   |   Bandwidth > 10: local_processing (12.0)
+|   |   |   Bandwidth > 11: local_processing (209.0)
+|   |   Bandwidth > 34
+|   |   |   Load <= 11
+|   |   |   |   Datasize <= 235: local_processing (2.0)
+|   |   |   |   Datasize > 235: 0.500/local_processing + 0.500/remote_processing (2.0)
+|   |   |   Load > 11: 0.500/local_processing + 0.500/remote_processing (11.0)
+Bandwidth > 35
+|   Load <= 32
+|   |   Datasize <= 296
+|   |   |   Memory <= 32: remote_processing (36.0)
+|   |   |   Memory > 32
+|   |   |   |   NB_concurrent_users <= 33: remote_processing (15.0)
+|   |   |   |   NB_concurrent_users > 33
+|   |   |   |   |   Datasize <= 294: local_processing (42.0)
+|   |   |   |   |   Datasize > 294: 0.500/local_processing + 0.500/remote_processing (2.0)
+|   |   Datasize > 296: remote_processing (116.0)
+|   Load > 32: remote_processing (439.0)
+
+Number of Leaves  : 	17
+
+Size of the tree : 	33
+
+
+Time taken to build model: 0.04 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         979               97.9    %
+Incorrectly Classified Instances        21                2.1    %
+Kappa statistic                          0.9506
+Mean absolute error                      0.0141
+Root mean squared error                  0.1109
+Relative absolute error                  4.9803 %
+Root relative squared error             29.4543 %
+Total Number of Instances             1000     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,992    0,020    0,992      0,992    0,992      0,971    0,990     0,992     remote_processing
+                 0,963    0,014    0,963      0,963    0,963      0,950    0,985     0,973     local_processing
+                 0,750    0,005    0,750      0,750    0,750      0,745    0,971     0,660     0.500/local_processing + 0.500/remote_processing
+Weighted Avg.    0,979    0,018    0,979      0,979    0,979      0,961    0,988     0,980     
+
