@@ -108,6 +108,23 @@ reality.
 \section{Architecture}
 \label{sec:fog-architecture}
 
+The architecture of a FOG network is shown in figure \ref{fig:fog-architecture}. It consists of three layers:
+\begin{itemize}
+	\item The edge layer is where the end devices are located, it includes sensors, actuators, and other devices that
+	      generate data.
+	\item The FOG layer is where the FOG nodes are located, it includes servers, gateways, and other devices that
+	      process data.
+	\item The cloud layer is where the cloud data centers are located, it includes servers, storage, and network
+	      services that store and process data.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.70\textwidth]{../images/FOG_network_ink.png}
+	\caption{FOG computing architecture.}
+	\label{fig:fog-architecture}
+\end{figure}
+
 \chapter{Offloading using Fuzzy logic}
 \label{chap:fuzzy}
 
@@ -357,7 +374,7 @@ parts of the project.
 
 \subsection{Partial results}
 
-Despite the lack of the M3$\Pi$ operator, we still ran the fuzzy engine with three different aggregation operators:
+Despite the absence of the M3$\Pi$ operator, we still ran the fuzzy engine with three different aggregation operators:
 maximum, probabilistic sum and bounded sum. Samples of the results are shown in tables \ref{tab:fuzzy-results-max},
 \ref{tab:fuzzy-results-prob} and \ref{tab:fuzzy-results-bounded}.
 
@@ -418,3 +435,5 @@ maximum, probabilistic sum and bounded sum. Samples of the results are shown in 
 	\caption{Sample results from the fuzzy engine with the Bounded sum aggregation operator.}
 	\label{tab:fuzzy-results-bounded}
 \end{table}
+
+\chapter{Decision trees}
