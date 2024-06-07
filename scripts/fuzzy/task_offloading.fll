@@ -2,54 +2,48 @@ Engine: TaskOffloading
 InputVariable: Bandwidth
   enabled: true
   range: 0.000 100.000
-  lock-range: false
   term: bw_low Trapezoid 0.000 20.000 30.000 40.000
-  term: bw_medium Trapezoid 35.000 45.000 60.000 70.000
+  term: bw_medium Triangle 30.000 37.000 75.000
   term: bw_high Trapezoid 65.000 75.000 90.000 100.000
 InputVariable: Datasize
   enabled: true
   range: 0.000 600.000
-  lock-range: false
   term: data_low Trapezoid 0.000 0.000 230.000 360.000
   term: data_medium Trapezoid 250.000 350.000 470.000 590.000
   term: data_high Trapezoid 450.000 540.000 600.000 600.000
 InputVariable: Load
   enabled: true
   range: 0.000 100.000
-  lock-range: false
   term: load_low Trapezoid 0.000 0.000 25.000 40.000
   term: load_medium Trapezoid 35.000 45.000 60.000 70.000
   term: load_high Trapezoid 65.000 80.000 100.000 100.000
 InputVariable: Memory
   enabled: true
   range: 0.000 100.000
-  lock-range: false
   term: mem_low Trapezoid 0.000 0.000 25.000 40.000
   term: mem_medium Trapezoid 35.000 45.000 60.000 70.000
   term: mem_high Trapezoid 65.000 80.000 100.000 100.000
 InputVariable: NB_concurrent_users
   enabled: true
   range: 0.000 100.000
-  lock-range: false
   term: user_low Trapezoid 0.000 0.000 25.000 40.000
-  term: user_medium Trapezoid 30.000 40.000 60.000 70.000
+  term: user_medium Triangle 30.000 50.000 75.000
   term: user_high Trapezoid 60.000 75.000 100.000 100.000
 OutputVariable: Processing
   enabled: true
   range: 0.000 100.000
+  accumulation: Maximum
+  defuzzifier: Centroid 200
+  default: 0.000
+  lock-valid: false
   lock-range: false
-  aggregation: none
-  defuzzifier: Centroid 10
-  default: nan
-  lock-previous: false
   term: local_processing Trapezoid 0.000 12.000 24.000 48.000
-  term: remote_processing Trapezoid 36.000 60.000 72.000 100.000
-RuleBlock: Mamdani
+  term: remote_processing Triangle 36.000 62.867 100.000
+RuleBlock:
   enabled: true
   conjunction: Minimum
   disjunction: Maximum
-  implication: Minimum
-  activation: General
+  activation: Minimum
   rule: if Bandwidth is bw_low then Processing is local_processing
   rule: if Bandwidth is not bw_low and Datasize is not data_low then Processing is remote_processing
   rule: if Bandwidth is not bw_low and Datasize is data_low and (Load is load_high or Memory is mem_low) then Processing is remote_processing
