@@ -1,7 +1,7 @@
 import fuzzylite as fl
 
 # import the engine
-engine = fl.Engine(
+engine_V2 = fl.Engine(
 	name="TaskOffloading",
 	input_variables=[
 		fl.InputVariable(
@@ -9,9 +9,9 @@ engine = fl.Engine(
 			minimum=0.0,
 			maximum=100.0,
 			terms=[
-				fl.Trapezoid("bw_low", 0.0, 20.0, 30.0, 40.0),
+				fl.Triangle("bw_low", 0.0, 20.0, 40.0),
 				fl.Triangle("bw_medium", 30.0, 37.0, 75.0),
-				fl.Trapezoid("bw_high", 65.0, 75.0, 90.0, 100.0)
+				fl.Triangle("bw_high", 65.0, 82.0, 100.0)
 			]
 		),
 		fl.InputVariable(
@@ -19,9 +19,9 @@ engine = fl.Engine(
 			minimum=0.0,
 			maximum=600.0,
 			terms=[               
-				fl.Trapezoid("data_low", 0.0, 0.0, 230.0, 360.0),
-				fl.Trapezoid("data_medium", 250.0, 350.0, 470.0, 590.0),
-				fl.Trapezoid("data_high", 450.0, 540.0, 600.0, 600.0)
+				fl.Triangle("data_low", 0.0, 180.0, 360.0),
+				fl.Triangle("data_medium", 250.0, 420.0, 590.0),
+				fl.Triangle("data_high", 450.0, 600.0, 600.0)
 			]
 		),
 		fl.InputVariable(
@@ -29,9 +29,9 @@ engine = fl.Engine(
 			minimum=0.0,
 			maximum=100.0,
 			terms=[
-				fl.Trapezoid("load_low", 0.0, 0.0, 25.0, 40.0),
-				fl.Trapezoid("load_medium", 35.0, 45.0, 60.0, 70.0),
-				fl.Trapezoid("load_high", 65.0, 80.0, 100.0, 100.0)
+				fl.Triangle("load_low", 0.0, 20.0, 40.0),
+				fl.Triangle("load_medium", 35.0, 52.0, 70.0),
+				fl.Triangle("load_high", 65.0, 82.0, 100.0)
 			]
 		),
 		fl.InputVariable(
@@ -39,9 +39,9 @@ engine = fl.Engine(
 			minimum=0.0,
 			maximum=100.0,
 			terms=[
-				fl.Trapezoid("mem_low", 0.0, 0.0, 25.0, 40.0),
-				fl.Trapezoid("mem_medium", 35.0, 45.0, 60.0, 70.0),
-				fl.Trapezoid("mem_high", 65.0, 80.0, 100.0, 100.0)
+				fl.Triangle("mem_low", 0.0, 20.0, 40.0),
+				fl.Triangle("mem_medium", 35.0, 52.0, 70.0),
+				fl.Triangle("mem_high", 65.0, 82.0, 100.0)
 			]
 		),
 		fl.InputVariable(
@@ -49,9 +49,9 @@ engine = fl.Engine(
 			minimum=0.0,
 			maximum=100.0,
 			terms=[
-				fl.Trapezoid("user_low", 0.0, 0.0, 25.0, 40.0),
-				fl.Triangle("user_medium", 30.0, 50.0, 75.0),
-				fl.Trapezoid("user_high", 60.0, 75.0, 100.0, 100.0)
+				fl.Triangle("user_low", 0.0, 20.0, 40.0),
+				fl.Triangle("user_medium", 30.0, 50.0, 70.0),
+				fl.Triangle("user_high", 60.0, 80.0, 100.0)
 			]
 		)
 	],
@@ -61,9 +61,9 @@ engine = fl.Engine(
 			minimum=0.0,
 			maximum=100.0,
 			aggregation = fl.Maximum(),
-			defuzzifier=fl.Centroid(10),
+			defuzzifier=fl.Centroid(200),
 			terms=[
-				fl.Trapezoid("local_processing", 0.0, 12.0, 24.0, 48.0),
+				fl.Triangle("local_processing", 0.0, 24.0, 48.0),
 				fl.Triangle("remote_processing", 36.0, 62.867, 100.0)
 			]
 		)
@@ -92,4 +92,5 @@ engine = fl.Engine(
 	]
 )
 
-fl.FllExporter().to_file("scripts/fuzzy/task_offloading.fll", engine)
+
+fl.FllExporter().to_file("scripts/fuzzy/task_offloading_V2.fll", engine_V2)

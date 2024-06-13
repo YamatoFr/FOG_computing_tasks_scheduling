@@ -136,8 +136,8 @@ engine = fl.Engine(
 			name="Processing",
 			minimum=0.0,
 			maximum=100.0,
-			aggregation = None,
-			defuzzifier=fl.Centroid(10),
+			aggregation = fl.Maximum(),
+			defuzzifier=fl.Centroid(200),
 			terms=[
 				fl.Trapezoid("local_processing", 0.0, 12.0, 24.0, 48.0),
 				fl.Trapezoid("remote_processing", 36.0, 60.0, 72.0, 100.0)
