@@ -1,7 +1,15 @@
 \documentclass[12pt]{report}
 \usepackage[utf8]{inputenc}
-\usepackage[vmargin = 1.5cm, hmargin = 2.6cm]{geometry}
-\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage[
+	vmargin = 1.5cm,
+	hmargin = 2.6cm
+	]{geometry}
+\usepackage[
+	defernumbers=true,
+	backend=biber,
+	style=numeric,
+	sorting=nyt
+	]{biblatex}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
@@ -15,6 +23,7 @@
 \usepackage{mathptmx, lmodern}
 \usepackage{hyperref, url}
 \usepackage{titlesec}
+\usepackage{tocloft}
 
 % "csquotes should be loaded after fvextra to avoid a warning from the lineno package"
 % but in this case the culprit is the "minted" package
@@ -101,7 +110,7 @@
 		
 		\pagestyle{fancyplain}
 		\fancyhf{}
-		\lhead{header}
+		\lhead{}
 		\rhead{\leftmark}
 		\cfoot{Page \thepage /\pageref{LastPage}}
 		\renewcommand{\headrulewidth}{0.5pt}
@@ -113,11 +122,13 @@
 		\renewcommand\textfraction{0.35}
 		\renewcommand\floatpagefraction{0.8}
 		
-		\bibliography{biblio}
-		
 		\counterwithout{figure}{chapter}
-		
-		
+
+		\addbibresource{biblio.bib}
+		\nocite{weka,wiki-weka,medium-j48,baeldung}
+		\DeclareBibliographyCategory{cited}
+		\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
 \begin{document}
 
 \titleformat{\chapter}{\normalfont\large\bfseries}{\thechapter}{20pt}{}
@@ -132,6 +143,7 @@
 \setcounter{figure}{0}
 
 \tableofcontents
+\addtocontents{toc}{\cftpagenumbersoff{subsec}}
 
 \include{abstract}
 \include{introduction}
@@ -139,5 +151,7 @@
 \include{realisation}
 \include{conclusion}
 
-\printbibliography
+\printbibliography[heading=bibintoc,category=cited,notkeyword={src}]
+\printbibliography[heading=subbibintoc,keyword={src},title={Data Sources}]
+
 \end{document}

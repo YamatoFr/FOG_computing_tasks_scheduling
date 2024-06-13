@@ -100,10 +100,15 @@ time, this is where FOG computing comes in. Instead of sending all the data to t
 processed on FOG nodes. The nodes can be anything from resource-rich servers to resource-constrained devices like
 gateways, routers or other end devices.
 
-It is designed to reduce latency, provide computing resources, storage and network services to the edge
-devices. It also provides location awareness, mobility support, and real-time data processing. FOG computing is ideal
-for applications that require real-time processing, like autonomous vehicles, industrial automation, and augmented
-reality.
+It is designed to reduce latency, provide computing resources, storage and network services to the edge devices. It also
+provides location awareness, mobility support, and real-time data processing. FOG computing is ideal for applications that
+require real-time processing, like autonomous vehicles, industrial automation, and augmented reality. FOG has also some
+drawbacks, it has a higher power consumption than edge computing, security and privacy concerns are also a major challenge.
+It also requires a higher bandwidth and more complex network infrastructure.
+
+However, FOG computing is not to be confused with edge computing, while they share some similarities, they are not the
+same. Edge computing is a subset of FOG computing, the processing is done at the edge of the network, while FOG computing
+allows the processing to be done anywhere between the edge and the cloud.\cite{onlogic,gfg,baeldung}
 
 \section{Architecture}
 \label{sec:fog-architecture}
@@ -120,7 +125,7 @@ The architecture of a FOG network is shown in figure \ref{fig:fog-architecture}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.70\textwidth]{../images/FOG_network_ink.png}
+	\includegraphics[width=0.90\textwidth]{../images/FOG_network_ink.png}
 	\caption{FOG computing architecture.}
 	\label{fig:fog-architecture}
 \end{figure}
@@ -128,8 +133,8 @@ The architecture of a FOG network is shown in figure \ref{fig:fog-architecture}.
 \chapter{Offloading using Fuzzy logic}
 \label{chap:fuzzy}
 
-\section{Introduction}
-\label{sec:fuzzy-intro}
+\section{Explaining fuzzy logic}
+\label{sec:fuzzy-explanation}
 
 Introduced in 1965 by Lotfi Zadeh,\cite{zadeh-1965} fuzzy logic is based on a "degree of truth" instead of a finite
 value, usually 0 or 1, it aims to represent the vagueness of human language and thought. Fuzzy systems are the means
@@ -144,7 +149,8 @@ Mamdani fuzzy system follows three steps:
 \end{itemize}
 
 While Sugeno includes the defuzzification step in the rule evaluation step, this system works well with optimization
-algorithms and is more computationally efficient than the Mamdani system.
+algorithms and is more computationally efficient than the Mamdani system. But for this project we will be using the
+Mamdani system.
 
 \subsection{Fuzzification}
 \label{subsec:fuzzy-fuzzification}
@@ -373,6 +379,7 @@ would require to modify a large part of the \textit{pyfuzzylite} library. We dec
 parts of the project.
 
 \subsection{Partial results}
+\label{subsec:fuzzy-results}
 
 Despite the absence of the M3$\Pi$ operator, we still ran the fuzzy engine with three different aggregation operators:
 maximum, probabilistic sum and bounded sum. Samples of the results are shown in tables \ref{tab:fuzzy-results-max},
@@ -437,3 +444,51 @@ maximum, probabilistic sum and bounded sum. Samples of the results are shown in 
 \end{table}
 
 \chapter{Decision trees}
+\label{chap:decision-trees}
+
+In an attempt to improve the offloading decision-making process, we decided to use the Weka\cite{weka} software to create
+a decision tree. We will use the J48 algorithm which is a Java implementation of the C4.5 algorithm. The goal is to was to
+improve upon the decision-making process of the fuzzy engine.
+
+\section{The Weka software}
+\label{sec:weka}
+
+Weka is a collection of machine learning algorithms for data processing and predictive modeling. It is written in Java and
+is distributed under the GNU General Public License. The software is designed to be user-friendly and easy to use, thanks
+to its graphical user interface. It is widely used in academia and industry for data mining, machine learning, and predictive
+analytics. Weka provides a wide range of algorithms for classification, regression, clustering, etc. The software also
+provides access to SQL databases with Java Database Connectivity (JDBC) and can also accept multiple data formats like
+ARFF, CSV, C4.5, etc.
+
+\subsection{The J48 algorithm}
+\label{subsec:j48}
+
+The J48 algorithm is a decision tree algorithm, it allows the creation of a decision tree from a set of training data. The
+algorithm works by recursively splitting the data into subsets based on the values of the input variables. The goal is to
+create a tree that can predict the value of the output variable based on the input variables. The algorithm uses the
+information gain to determine the best split at each node, the information gain is a measure of the reduction in entropy.
+
+The training data is a set of already classified data, it contains the values of the input variables and the corresponding
+value of the output variable and the class it belongs to. The algorithm uses this data to build the decision tree, at each
+node, it selects the attribute that split the data into the best subsets. The process is repeated until all the data is
+classified. The decision tree can then be used to predict the value of the output variable for new data.
+
+Decision trees are used to represent the decision-making process in a graphical form, they are easy to understand and
+interpret. They can also be used to identify the most important variables in the data and to detect patterns and
+relationships between the variables.
+
+\subsubsection{The decision tree}
+\label{subsubsec:decision-tree}
+
+The resulting decision tree is composed of nodes, leaves and branches:
+\begin{itemize}
+	\item The nodes represent the attributes where the data was split,
+	\item the branches represent the value of the attribute,
+	\item the leaves represent the class that the data belongs to.
+\end{itemize}
+
+When building the tree, the missing values are ignored but can be predicted by using the attribute value that is most
+common in the training data. The tree can be pruned to improve its accuracy and reduce its complexity. Pruning is the
+process of removing nodes that do not improve the accuracy of the tree. The decision tree can be visualized using the
+graphical user interface of Weka. The tree can also be exported as a text file for further analysis.
+
