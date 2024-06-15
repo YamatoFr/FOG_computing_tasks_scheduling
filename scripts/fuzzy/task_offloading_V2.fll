@@ -3,7 +3,7 @@ InputVariable: Bandwidth
   enabled: true
   range: 0.000 100.000
   term: bw_low Triangle 0.000 20.000 40.000
-  term: bw_medium Triangle 30.000 37.000 75.000
+  term: bw_medium Triangle 30.000 37.000 70.000
   term: bw_high Triangle 65.000 82.000 100.000
 InputVariable: Datasize
   enabled: true

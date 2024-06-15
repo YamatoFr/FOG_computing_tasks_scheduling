@@ -1,4 +1,5 @@
-\documentclass[12pt]{report}
+\documentclass[12pt,notitlepage]{report}
+\usepackage[french,english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[
 	vmargin = 1.5cm,
@@ -12,7 +13,6 @@
 	]{biblatex}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[T1]{fontenc}
-\usepackage[english]{babel}
 \usepackage[title]{appendix}
 \usepackage[most]{tcolorbox}
 
@@ -121,11 +121,19 @@
 		\renewcommand\topfraction{.9}
 		\renewcommand\textfraction{0.35}
 		\renewcommand\floatpagefraction{0.8}
+
+		\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
 		
 		\counterwithout{figure}{chapter}
 
 		\addbibresource{biblio.bib}
-		\nocite{weka,wiki-weka,medium-j48,baeldung}
+		\nocite{
+			weka,
+			wiki-weka,
+			medium-j48,
+			onlogic,
+			gfg,
+			baeldung}
 		\DeclareBibliographyCategory{cited}
 		\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 

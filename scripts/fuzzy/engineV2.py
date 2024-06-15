@@ -10,7 +10,7 @@ engine_V2 = fl.Engine(
 			maximum=100.0,
 			terms=[
 				fl.Triangle("bw_low", 0.0, 20.0, 40.0),
-				fl.Triangle("bw_medium", 30.0, 37.0, 75.0),
+				fl.Triangle("bw_medium", 30.0, 37.0, 70.0),
 				fl.Triangle("bw_high", 65.0, 82.0, 100.0)
 			]
 		),
