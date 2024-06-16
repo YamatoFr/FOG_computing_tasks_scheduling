@@ -1,3 +1,17 @@
+\chapter{Problem statement}
+\label{chap:problem-statement}
+
+\section{Context}
+\label{sec:context}
+
+
+
+\section{Work environment}
+\label{sec:work-environment}
+
+\section{Objective}
+\label{sec:objective}
+
 \chapter{Internet of Things (IoT)}
 \label{chap:iot}
 
@@ -184,9 +198,8 @@ Mamdani system.
 
 Fuzzification is the process of converting a crisp value into a fuzzy value, this is done by assigning a membership
 function to the input value. The membership function is a curve that defines how much the input value belongs to a
-certain fuzzy set. The most common membership functions are the triangular and trapezoidal functions, they are defined
-by three or four parameters respectively. The triangular function is defined by the parameters $a$, $b$ and $c$ and
-is given by:
+certain fuzzy set. The most common fuzzy sets are the triangular and trapezoidal functions, they are defined by three
+or four parameters respectively. The triangular function is defined by the parameters $a$, $b$ and $c$ and is given by:
 
 \begin{equation}
 	\mu(x) = \begin{cases}
@@ -285,8 +298,8 @@ To demonstrate the use of fuzzy logic in offloading, we wrote two simple program
 the experiment done by Hari et al.\cite{Hari-et-al-2018} The first program uses the \textit{pyfuzzylite}\cite{fuzzylite}
 library to implement a fuzzy engine with all the variables and rules needed to determine the offloading decision. The
 second program uses the NumPy library to generate random values for the inputs and then uses the fuzzy engine to determine
-the offloading decision. The fuzzy engine is defined by the variables shown in table \ref{tab:fuzzy-input} and
-\ref{tab:fuzzy-output}.
+the offloading decision (remote execution or local execution, remote execution means offloading the task to the cloud or
+a fog node). The fuzzy engine is defined by the variables shown in table \ref{tab:fuzzy-input} and \ref{tab:fuzzy-output}.
 
 \begin{table}[H]
 	\centering
@@ -417,14 +430,14 @@ maximum, probabilistic sum and bounded sum. Samples of the results are shown in 
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
 			\hline
-			Bandwidth & Data size & Number of        & Memory & Load & Processing & Fuzzy output                                     \\
-			          &           & concurrent users &        &      &            &                                                  \\
+			Bandwidth & Data size & Number of        & Memory & Load & Crisp  & Fuzzy output                                     \\
+			          &           & concurrent users &        &      & output &                                                  \\
 			\hline
-			30        & 180       & 42               & 38     & 66   & 21.575     & 1.000/local_processing + 0.000/remote_processing \\
-			77        & 462       & 44               & 96     & 8    & 67.539     & 0.000/local_processing + 1.000/remote_processing \\
-			3         & 21        & 45               & 75     & 50   & 60.732     & 0.150/local_processing + 0.850/remote_processing \\
-			38        & 229       & 51               & 31     & 66   & 57.565     & 0.200/local_processing + 0.600/remote_processing \\
-			50        & 302       & 17               & 96     & 92   & 68.116     & 0.000/local_processing + 0.554/remote_processing \\
+			30        & 180       & 42               & 38     & 66   & 21.575 & 1.000/local_processing + 0.000/remote_processing \\
+			77        & 462       & 44               & 96     & 8    & 67.539 & 0.000/local_processing + 1.000/remote_processing \\
+			3         & 21        & 45               & 75     & 50   & 60.732 & 0.150/local_processing + 0.850/remote_processing \\
+			38        & 229       & 51               & 31     & 66   & 57.565 & 0.200/local_processing + 0.600/remote_processing \\
+			50        & 302       & 17               & 96     & 92   & 68.116 & 0.000/local_processing + 0.554/remote_processing \\
 			\hline
 		\end{tabular}}
 	\caption{Sample results from the fuzzy engine with the Maximum aggregation operator.}
@@ -436,14 +449,14 @@ maximum, probabilistic sum and bounded sum. Samples of the results are shown in 
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
 			\hline
-			Bandwidth & Data size & Number of        & Memory & Load & Processing & Fuzzy output                                     \\
-			          &           & concurrent users &        &      &            &                                                  \\
+			Bandwidth & Data size & Number of        & Memory & Load & Crisp  & Fuzzy output                                     \\
+			          &           & concurrent users &        &      & output &                                                  \\
 			\hline
-			30        & 180       & 42               & 38     & 66   & 21.575     & 1.000/local_processing + 0.000/remote_processing \\
-			77        & 462       & 44               & 96     & 8    & 67.539     & 0.000/local_processing + 1.000/remote_processing \\
-			3         & 21        & 45               & 75     & 50   & 60.443     & 0.150/local_processing + 0.850/remote_processing \\
-			38        & 229       & 51               & 31     & 66   & 61.27      & 0.200/local_processing + 0.904/remote_processing \\
-			50        & 302       & 17               & 96     & 92   & 68.314     & 0.000/local_processing + 0.863/remote_processing \\
+			30        & 180       & 42               & 38     & 66   & 21.575 & 1.000/local_processing + 0.000/remote_processing \\
+			77        & 462       & 44               & 96     & 8    & 67.539 & 0.000/local_processing + 1.000/remote_processing \\
+			3         & 21        & 45               & 75     & 50   & 60.443 & 0.150/local_processing + 0.850/remote_processing \\
+			38        & 229       & 51               & 31     & 66   & 61.27  & 0.200/local_processing + 0.904/remote_processing \\
+			50        & 302       & 17               & 96     & 92   & 68.314 & 0.000/local_processing + 0.863/remote_processing \\
 			\hline
 		\end{tabular}}
 	\caption{Sample results from the fuzzy engine with the Probabilistic sum
@@ -456,19 +469,22 @@ maximum, probabilistic sum and bounded sum. Samples of the results are shown in 
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
 			\hline
-			Bandwidth & Data size & Number of        & Memory & Load & Processing & Fuzzy output                                     \\
-			          &           & concurrent users &        &      &            &                                                  \\
+			Bandwidth & Data size & Number of        & Memory & Load & Crisp  & Fuzzy output                                     \\
+			          &           & concurrent users &        &      & output &                                                  \\
 			\hline
-			30        & 180       & 42               & 38     & 66   & 21.575     & 1.000/local_processing + 0.000/remote_processing \\
-			77        & 462       & 44               & 96     & 8    & 67.539     & 0.000/local_processing + 1.000/remote_processing \\
-			3         & 21        & 45               & 75     & 50   & 60.275     & 0.150/local_processing + 0.850/remote_processing \\
-			38        & 229       & 51               & 31     & 66   & 61.855     & 0.200/local_processing + 1.000/remote_processing \\
-			50        & 302       & 17               & 96     & 92   & 67.903     & 0.000/local_processing + 1.000/remote_processing \\
+			30        & 180       & 42               & 38     & 66   & 21.575 & 1.000/local_processing + 0.000/remote_processing \\
+			77        & 462       & 44               & 96     & 8    & 67.539 & 0.000/local_processing + 1.000/remote_processing \\
+			3         & 21        & 45               & 75     & 50   & 60.275 & 0.150/local_processing + 0.850/remote_processing \\
+			38        & 229       & 51               & 31     & 66   & 61.855 & 0.200/local_processing + 1.000/remote_processing \\
+			50        & 302       & 17               & 96     & 92   & 67.903 & 0.000/local_processing + 1.000/remote_processing \\
 			\hline
 		\end{tabular}}
 	\caption{Sample results from the fuzzy engine with the Bounded sum aggregation operator.}
 	\label{tab:fuzzy-results-bounded}
 \end{table}
+
+For the rest of the project, we will use the Maximum aggregation operator as it gave the best results. We will also focus
+on improving the decision-making process by using a decision tree.
 
 \chapter{Decision trees}
 \label{chap:decision-trees}
@@ -486,6 +502,22 @@ to its graphical user interface. It is widely used in academia and industry for 
 analytics. Weka provides a wide range of algorithms for classification, regression, clustering, etc. The software also
 provides access to SQL databases with Java Database Connectivity (JDBC) and can also accept multiple data formats like
 ARFF, CSV, C4.5, etc.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{../images/Weka_logo.png}
+		\caption{Weka logo.}
+		\label{fig:waka-logo}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{../images/weka-icon.png}
+		\caption{Weka software icon.}
+		\label{fig:waka-icon}
+	\end{minipage}
+\end{figure}
 
 \subsection{The J48 algorithm}
 \label{subsec:j48}
@@ -531,19 +563,16 @@ its complexity.
 \section{Results}
 \label{sec:decision-tree-results}
 
+\subsection{Generating the decision tree}
+\label{subsec:decision-tree-generation}
+
 For this test, we used the data we generated with the fuzzy engine. These data are in the form of a CSV file with a
 header and 21 rows. They contain the values of the input variables and the corresponding value of the output variable
 in both crisp and fuzzy form. The data was loaded into Weka and the J48 algorithm was applied to it. The resulting
 decision tree is shown in figure \ref{fig:decision-tree}.
 
-\subsection{}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{../images/decision_tree.png}
-	\caption{Decision tree generated by the J48 algorithm. (Recreated with Inkscape)}
-	\label{fig:decision-tree}
-\end{figure}
+\subsection{Updating the fuzzy engine}
+\label{subsec:decision-tree-update}
 
 We then used this decision tree to modify the membership functions of our input and output variables, we also modified
 the input variables not appearing in the decision tree to match the other variables. The functions were changed to
@@ -551,6 +580,13 @@ triangular, the original brackets for each variable were kept. The middle value 
 was changed according to the decision tree, for the other variables we took the average of the brackets. The same process
 was done for the output variable, the new values are shown in tables \ref{tab:new-fuzzy-input} and
 \ref{tab:new-fuzzy-output}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{../images/decision_tree.png}
+	\caption{Decision tree generated by the J48 algorithm. (Recreated with Inkscape)}
+	\label{fig:decision-tree}
+\end{figure}
 
 \begin{table}[H]
 	\centering
@@ -601,18 +637,138 @@ When defining the membership functions, we usually want them to be symmetrical b
 values as they were in the decision tree. This resulted in \textbf{Bandwidth} and \textbf{Processing} not having
 symmetrical membership functions, \textbf{Data size} is also in this case but for a different reason and is not as
 noticeable. We can use the graphic interface of QtFuzzyLite to visualize the new membership functions and compare them
-to the original ones. The results are shown in figures \ref{fig:old-fuzzy-engine} and \ref{fig:new-fuzzy-engine}.
+to the original ones. The results are shown in figures \ref{fig:old-fuzzy-engine-inputs}, \ref{fig:old-fuzzy-engine-output},
+\ref{fig:new-fuzzy-engine-inputs} and \ref{fig:new-fuzzy-engine-output}.
+
+\subsection{Generating new results with the updated fuzzy engine}
+\label{subsec:new-fuzzy-results}
+
+After updating the fuzzy engine, we made a script capable of running both the old and new fuzzy engines with the same
+input data. We then compared the results to see if the decision tree improved the accuracy of the fuzzy engine. The
+results are shown in tables \ref{tab:old-fuzzy-results} and \ref{tab:new-fuzzy-results}.
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+			\hline
+			Bandwidth & Data size & Number of        & Memory & Load & Crisp  & Fuzzy output                                     \\
+			          &           & concurrent users &        &      & output &                                                  \\
+			\hline
+			43        & 505       & 44               & 92     & 69   & 67.228 & 0.000/local_processing + 1.000/remote_processing \\
+			20        & 285       & 87               & 35     & 93   & 21.6   & 1.000/local_processing + 0.000/remote_processing \\
+			83        & 193       & 71               & 71     & 36   & 56.42  & 0.267/local_processing + 0.733/remote_processing \\
+			45        & 353       & 9                & 77     & 72   & 67.251 & 0.000/local_processing + 0.946/remote_processing \\
+			70        & 61        & 93               & 64     & 17   & 21.6   & 1.000/local_processing + 0.000/remote_processing \\
+			28        & 418       & 60               & 35     & 22   & 21.6   & 1.000/local_processing + 0.000/remote_processing \\
+			60        & 345       & 31               & 53     & 15   & 62.239 & 0.115/local_processing + 0.885/remote_processing \\
+			37        & 400       & 77               & 71     & 18   & 55.221 & 0.300/local_processing + 0.700/remote_processing \\
+			\hline
+		\end{tabular}}
+	\caption{Sample results from the old fuzzy engine.}
+	\label{tab:old-fuzzy-results}
+
+	\bigskip
+
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+			\hline
+			Bandwidth & Data size & Number of        & Memory & Load & Crisp  & Fuzzy output                                     \\
+			          &           & concurrent users &        &      & output &                                                  \\
+			\hline
+			43        & 505       & 44               & 92     & 69   & 66.289 & 0.000/local_processing + 1.000/remote_processing \\
+			20        & 285       & 87               & 35     & 93   & 24.0   & 1.000/local_processing + 0.000/remote_processing \\
+			83        & 193       & 71               & 71     & 36   & 57.64  & 0.200/local_processing + 0.800/remote_processing \\
+			45        & 353       & 9                & 77     & 72   & 66.294 & 0.000/local_processing + 0.961/remote_processing \\
+			70        & 61        & 93               & 64     & 17   & 53.206 & 0.339/local_processing + 0.661/remote_processing \\
+			28        & 418       & 60               & 35     & 22   & 45.829 & 0.600/local_processing + 0.400/remote_processing \\
+			60        & 345       & 31               & 53     & 15   & 62.223 & 0.083/local_processing + 0.917/remote_processing \\
+			37        & 400       & 77               & 71     & 18   & 59.483 & 0.150/local_processing + 0.850/remote_processing \\
+			\hline
+		\end{tabular}}
+	\caption{Sample results from the new fuzzy engine.}
+	\label{tab:new-fuzzy-results}
+\end{table}
+
+We can see that, while some results are nearly identical, others are quite different. The new engine either reinforced the
+decision made by the old engine or changed it. Overall, the new engine seems to yield better and more consistent results.
+This is worth expending upon in the future by using more data and refining the decision tree. However, we lack the time to
+do so in the context of this project.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{../images/old-vars.png}
-	\caption{Fuzzy engine with the old membership functions.}
-	\label{fig:old-fuzzy-engine}
+	\includegraphics[width=0.63\textwidth]{../images/old-vars-inputs.png}
+	\caption{Input variables for the old fuzzy engine.}
+	\label{fig:old-fuzzy-engine-inputs}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{../images/new-vars.png}
-	\caption{Fuzzy engine with the new membership functions.}
-	\label{fig:new-fuzzy-engine}
+	\includegraphics[width=0.63\textwidth]{../images/old-vars-output.png}
+	\caption{Output variable for the old fuzzy engine.}
+	\label{fig:old-fuzzy-engine-output}
 \end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.63\textwidth]{../images/new-vars-inputs.png}
+	\caption{Input variables for the new fuzzy engine.}
+	\label{fig:new-fuzzy-engine-inputs}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.63\textwidth]{../images/new-vars-output.png}
+	\caption{Output variable for the new fuzzy engine.}
+	\label{fig:new-fuzzy-engine-output}
+\end{figure}
+
+\chapter{Future work}
+\label{chap:future-work}
+
+The original goal of this project was to create a task scheduler for a fog computing environment, improve the energy
+efficiency while maintaining the quality of service and considering the use green energy sources. We did not manage
+to create a task scheduler, but we do have leads on how to proceed.
+
+\section{Task scheduler}
+\label{sec:task-scheduler}
+
+As the name implies, the task scheduler is responsible for assigning tasks to the available resources. The scheduler
+must take into account the state of the resources, the requirements of the tasks and the constraints of the system.
+It must also be able to adapt to the changing conditions and make decisions in real-time.
+
+\subsection{The machine learning approach}
+\label{subsec:ml-approach}
+
+The most promising approach is to use machine learning algorithms. Based on the works mentioned in section
+\ref{subsec:ai-in-fogcomputing}, we can use Convolutional Neural Networks (CNN). CNNs are a type of neural network
+that is well suited for image recognition tasks. They are composed of multiple layers of neurons that process the input
+data in a hierarchical manner. The input data is passed through a series of convolutional layers, pooling layers and
+fully connected layers. The output is a vector of probabilities that represent the likelihood of the input data belonging
+to a certain class. The architecture of a CNN is shown in figure \ref{fig:cnn}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../images/architectureCNN.png}
+	\caption{Convolutional Neural Network architecture.\cite{nada-belaidi-cnn}}
+	\label{fig:cnn}
+\end{figure}
+
+The way we would use CNNs is by training them on pre-existing data. The data would contain the state of the resources,
+the requirements of the tasks, the constraints of the system and an established schedule like the one shown in figure
+\ref{fig:schedule}. The CNN would then learn the patterns and relationships between the variables and be able to predict
+the best schedule for new data. It would also need to take into account the energy sources used to power the resources
+and the cost of using them.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../images/schedule.jpg}
+	\caption{Example of a schedule of tasks. Each color represents the amount of CPU cores used by the task, red is 1 core,
+		green is 2 cores and blue is 4 cores.}
+	\label{fig:schedule}
+\end{figure}
+
+After the fuzzy engine offloads the tasks to the cloud or the fog nodes, the CNN would then assign the tasks to the
+available resources. It will optimize the schedule to minimize the energy consumption, execution time and cost, while
+maximizing the amount of tasks executed and the green energy used.

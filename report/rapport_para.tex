@@ -2,8 +2,8 @@
 \usepackage[french,english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[
-	vmargin = 1.5cm,
-	hmargin = 2.6cm
+	vmargin = 2cm,
+	hmargin = 2.5cm
 	]{geometry}
 \usepackage[
 	defernumbers=true,
@@ -128,12 +128,12 @@
 
 		\addbibresource{biblio.bib}
 		\nocite{
-			weka,
 			wiki-weka,
 			medium-j48,
 			onlogic,
 			gfg,
-			baeldung}
+			baeldung,
+			wiki-fuzzy}
 		\DeclareBibliographyCategory{cited}
 		\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 
