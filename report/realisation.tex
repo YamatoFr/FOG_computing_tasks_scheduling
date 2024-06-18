@@ -450,16 +450,32 @@ generalization of the probabilistic sum. The 3$\Pi$ operator is defined by the f
 Unlike T-norms and T-conorms, the 3$\Pi$ operator is \textit{full reinforced} which means that it satisfies the
 properties of both positive and negative reinforcement operators.
 
-We decided to implement a M3$\Pi$ aggregation operator which is derived from the 3$\Pi$ operator, it is defined by the
-following formula:
+We decided to implement a M3$\Pi$ aggregation operator which is derived from the 3$\Pi$ operator, it is defined
+by the following formula:
 
 \begin{equation}
   M3\Pi(x_1, \cdots, x_n) = \frac{\Pi_{j=1}^n (x_j)^{(1/n)}}{\Pi_{j=1}^n (x_j)^{(1/n)} + \Pi_{j=1}^n (1 - x_j)^{(1/n)}}
 \end{equation}
 
+According to \cite{doncescu-et-al-2007}, if we consider the standard arithmetic mean $\frac{1}{n}\sum_{j=1}^{n}x_j$, then: \\
+$\forall j \in 1, \cdots, n$, we have:
+
+\begin{equation}
+  M3\Pi(x_1, \cdots, x_n) \geq \frac{1}{n}\sum_{j=1}^{n}x_j, \text{ if } x_j \geq 0.5
+\end{equation}
+
+and:
+
+\begin{equation}
+  M3\Pi(x_1, \cdots, x_n) \leq \frac{1}{n}\sum_{j=1}^{n}x_j, \text{ if } x_j \leq 0.5
+\end{equation}
+
+The authors of \cite{doncescu-et-al-2007} named this property \textit{mean reinforcement}.
+
 The goal was to improve the decision-making process. However, we were unable to implement the M3$\Pi$ operator as it
-would require to modify a large part of the \textit{pyfuzzylite} library. We decided to shift our focus towards other
-parts of the project.
+would require to modify a large part of the \textit{pyfuzzylite} library. The library is relatively complex and the
+intricacies of the implementation were beyond our expertise. We decided to shift our focus towards other parts of
+the project.
 
 \subsection{Partial results}
 \label{subsec:fuzzy-results}
@@ -766,65 +782,3 @@ do so in the context of this project.
   \caption{Output variable for the new fuzzy engine.}
   \label{fig:new-fuzzy-engine-output}
 \end{figure}
-
-\chapter{Future work}
-\label{chap:future-work}
-
-The original goal of this project was to create a task scheduler for a fog computing environment, improve the energy
-efficiency while maintaining the quality of service and considering the use green energy sources. We did not manage
-to create a task scheduler, but we do have leads on how to proceed.
-
-\section{Task scheduler}
-\label{sec:task-scheduler}
-
-As the name implies, the task scheduler is responsible for assigning tasks to the available resources. The scheduler
-must take into account the state of the resources, the requirements of the tasks and the constraints of the system.
-It must also be able to adapt to the changing conditions and make decisions in real-time.
-
-\subsection{The machine learning approach}
-\label{subsec:ml-approach}
-
-The most promising approach is to use machine learning algorithms. Based on the works mentioned in section
-\ref{subsec:ai-in-fogcomputing}, we can use Convolutional Neural Networks (CNN). CNNs are a type of neural network
-that is well suited for image recognition tasks. They are composed of multiple layers of neurons that process the input
-data in a hierarchical manner. The input data is passed through a series of convolutional layers, pooling layers and
-fully connected layers. The output is a vector of probabilities that represent the likelihood of the input data belonging
-to a certain class. The architecture of a CNN is shown in figure \ref{fig:cnn}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{../images/architectureCNN.png}
-  \caption{Convolutional Neural Network architecture.\cite{nada-belaidi-cnn}}
-  \label{fig:cnn}
-\end{figure}
-
-The way we would use CNNs is by training them on pre-existing data. The data would contain the state of the resources,
-the requirements of the tasks, the constraints of the system and an established schedule like the one shown in figure
-\ref{fig:schedule}. The CNN would then learn the patterns and relationships between the variables and be able to predict
-the best schedule for new data. It would also need to take into account the energy sources used to power the resources
-and the cost of using them.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{../images/schedule.jpg}
-  \caption{Example of a schedule of tasks. Each color represents the amount of CPU cores used by the task, red is 1 core,
-    green is 2 cores and blue is 4 cores.}
-  \label{fig:schedule}
-\end{figure}
-
-After the fuzzy engine offloads the tasks to the cloud or the fog nodes, the CNN would then assign the tasks to the
-available resources. It will optimize the schedule to minimize the energy consumption, execution time and cost, while
-maximizing the amount of tasks executed and the green energy used.
-
-\subsection{Genetic algorithms approach}
-\label{subsec:ga-approach}
-
-We have already seen in previous research that genetic algorithms can be used to optimize the task scheduling process.
-Genetic algorithms are a type of optimization algorithm that is inspired by the process of natural selection. They work
-by creating a population of candidate solutions, evaluating them based on a fitness function, selecting the best solutions,
-recombining them and mutating them to create new solutions. The process is repeated until a satisfactory solution is found.
-
-With this in mind, we could use genetic algorithms to optimize the task scheduling process. We would create a population
-of schedules, evaluate them based on the energy consumption, execution time and cost, select the best schedules, recombine
-them and mutate them to create new schedules. The process would be repeated until a schedule that meets the requirements
-is found.
