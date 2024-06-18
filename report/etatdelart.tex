@@ -1,13 +1,13 @@
 \chapter{Related Work}
 \label{chap:related-work}
 
+\section{Fog computing}
+\label{sec:fog-computing}
+
 There are many existing studies and researches on the topics task scheduling, energy efficiency and AI in the context
 of fog computing. The concept of fog computing was introduced by Cisco in 2012 \cite{bonomi-et-al-2012}, and since
 then, many researches have been conducted to improve the performance of fog computing systems and reduce their
 environmental impact.
-
-\section{Fog computing}
-\label{sec:fog-computing}
 
 Fog computing is a paradigm that extends cloud computing and services to the edge of the network.
 \cite{rana-abubacker-2023} and \cite{abubacker-et-al-2023} respectively investigate the concepts surrounding fog
@@ -17,30 +17,37 @@ work on fog computing.
 \subsection{Task Scheduling in Fog Computing}
 \label{subsec:task-scheduling}
 
-\subsubsection*{Genetic Algorithms}
-\label{subsubsec:genetic-algorithms}
-
 The task scheduling problem in fog computing has been widely studied in the literature. Many researchers have proposed
 different algorithms and techniques to optimize the task scheduling process in fog computing systems.
 \cite{misirli-casalicchio-2024} offers an analysis of the existing algorithms while identifying the challenges and
-research gaps. In \cite{rjoub-bentahar-2017}, the authors propose a task scheduling algorithm based on Swarm
-Intelligence and Machine Learning. This hybrid approach minimizes the execution time and the makespan and improves the
-performance of the load balancing scheduling. In \cite{canali-lancellotti-2019}, an optimization model is proposed for
-the problem of mapping data stream over fog nodes while considering the load of those nodes and the latency between the
-sensors and the nodes. A heuristic based on genetic algorithms is then presented to address the complexity of the
-problem. In \cite{yousif-et-al-2024}, the authors propose a task clustering and scheduling mechanism based on
-Differential Evolution to find the optimal execution time for the tasks. The mechanism is compared to the Firefly
-Algorithm and Particle Swarm Optimization, and the results show that the proposed mechanism outperforms the other two
-algorithms in terms of execution time, system efficiency and stability.
+research gaps.
 
-\subsubsection*{Fuzzy Logic}
-\label{subsubsec:fuzzy-logic}
+\subsubsection*{Genetic Algorithms}
+\label{subsubsec:genetic-algorithms}
 
-\cite{benblidia-et-al-2019} proposes a ranking-based task scheduling method that combines fuzzy logic and user
-preferences. In \cite{ali-et-al-2021}, the authors propose an approach based on Fuzzy Logic for real-time task
-scheduling in IoT applications.
+In \cite{rjoub-bentahar-2017}, the authors propose a task scheduling algorithm based on Swarm Intelligence and Machine
+Learning. This hybrid approach minimizes the execution time and the makespan and improves the performance of the load
+balancing scheduling. In \cite{canali-lancellotti-2019}, an optimization model is proposed for the problem of mapping
+data stream over fog nodes while considering the load of those nodes and the latency between the sensors and the nodes.
+A heuristic based on genetic algorithms is then presented to address the complexity of the problem. In
+\cite{yousif-et-al-2024}, the authors propose a task clustering and scheduling mechanism based on Differential Evolution
+to find the optimal execution time for the tasks. The mechanism is compared to the Firefly Algorithm and Particle Swarm
+Optimization, and the results show that the proposed mechanism outperforms the other two algorithms in terms of execution
+time, system efficiency and stability.
 
-\subsection{Energy Efficiency in Fog Computing}
+\subsubsection*{AI in Fog Computing}
+\label{subsec:ai-in-fogcomputing}
+
+The use of AI in fog computing has been a growing trend in the literature. An efficient binary CNN with numerous skip
+connections is proposed by the authors of \cite{wu-et-al-2021}. In \cite{yang-et-al-2022}, the authors designed an
+intelligent energy-saving model based on CNN and a task scheduling model is designed based on the policy gradient
+algorithm. \cite{jing-xue-2023} present an improved convolutional neural network so solve the value function of a
+Continuous Markov Decision Process model, so it can be applied to a multi-user system.
+
+\subsection{Optimization in Fog Computing}
+\label{subsec:optimization-in-fogcomputing}
+
+\subsubsection*{Optimizing the energy efficiency}
 \label{subsec:energy-efficiency}
 
 The energy efficiency of fog computing systems has been a major concern for researchers. \cite{alhumaima-2020}
@@ -53,11 +60,13 @@ Metaheuristic algorithm based on the Harris Hawks Optimization algorithm, itself
 task scheduling in fog computing, is proposed in \cite{abdel-basset-et-al-2021}. \cite{wang-et-al-2023} proposes an
 energy efficient algorithm through an integrated computation model.
 
-\subsection{AI in Fog Computing}
-\label{subsec:ai-in-fogcomputing}
+\subsubsection*{Optimizing using fuzzy logic}
+\label{subsubsec:fuzzy-logic}
 
-The use of AI in fog computing has been a growing trend in the literature. An efficient binary CNN with numerous skip
-connections is proposed by the authors of \cite{wu-et-al-2021}. In \cite{yang-et-al-2022}, the authors designed an
-intelligent energy-saving model based on CNN and a task scheduling model is designed based on the policy gradient
-algorithm. \cite{jing-xue-2023} present an improved convolutional neural network so solve the value function of a
-Continuous Markov Decision Process model, so it can be applied to a multi-user system.
+\cite{benblidia-et-al-2019} proposes a ranking-based task scheduling method that combines fuzzy logic and user
+preferences. Their experimental results show that the proposed approach satisfies the user preferences and is a
+compromising solution between the user satisfaction and energy consumption. In \cite{ali-et-al-2021}, the authors
+propose an approach based on Fuzzy Logic for real-time task scheduling in IoT applications. \cite{Hari-et-al-2018}
+introduces a fuzzy-logic-based decision engine for offloading IoT application, it proposes an algorithm that takes
+into multiple parameters to take a decision. They compare execution time and energy usage to other classical algorithms
+and show that their approach is less power hungry.

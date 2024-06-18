@@ -133,7 +133,8 @@
 			onlogic,
 			gfg,
 			baeldung,
-			wiki-fuzzy}
+			wiki-fuzzy,
+			laas-cnrs}
 		\DeclareBibliographyCategory{cited}
 		\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 
@@ -147,9 +148,12 @@
 
 \include{pageDeGarde}
 
+\include{remerciements}
+
 \renewcommand{\thefigure}{\arabic{figure}}
 \setcounter{figure}{0}
 
+\pagenumbering{arabic}
 \tableofcontents
 \addtocontents{toc}{\cftpagenumbersoff{subsec}}
 
@@ -158,6 +162,8 @@
 \include{etatdelart}
 \include{realisation}
 \include{conclusion}
+
+\include{annexe}
 
 \printbibliography[heading=bibintoc,category=cited,notkeyword={src}]
 \printbibliography[heading=subbibintoc,keyword={src},title={Data Sources}]
